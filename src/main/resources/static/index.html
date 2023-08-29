@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Bootstrap 4, from LayoutIt!</title>
+
+	<meta name="description" content="Source code generated using layoutit.com">
+	<meta name="author" content="LayoutIt!">
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<noscript>
+		<h2>Sorry! Your browser doesn't support Javascript</h2>
+	</noscript>
+	<div id="username-page">
+		<div class="username-page-container">
+			<h1 class="title">Nome of user to enter in chatroom</h1>
+			<form id="usernameForm" name="usernameForm">
+				<div class="form-group">
+					<input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="accent username-submit">Start Chatting</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="chat-page" class="hidden">
+		<div class="chat-container">
+			<div class="chat-header">
+				<h2>Calc-chat</h2>
+			</div>
+			<div class="connecting">
+				Connecting...
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-7 ">
+							
+								<ul  id="messageArea">
+								</ul>
+							
+							<form id="messageForm" name="messageForm">
+								<div class="form-group">
+									<div class="input-group clearfix">
+										<input type="text" id="message" placeholder="Type a message..."
+											autocomplete="off" class="form-control" />
+										<button type="submit" class="primary">Send</button>
+									</div>
+								</div>
+							</form>
+							</tbody>
+
+						</div>
+						<div class="col-md-5">
+							
+								<ul id="productArea">
+
+								</ul>
+							
+							<form id="productForm" name="productForm">
+								<div class="form-group">
+									<div class="input-group clearfix">
+										<input type="text" id="produc" placeholder="Type a message..."
+											autocomplete="off" class="form-control" />
+										<button type="submit" class="primary" class="form-control">Add</button>
+									</div>
+									<div  class="input-group clearfix">
+										<input type="number" id="count" value="1" min="1" style="width: 50px;" >
+										<input type="text" id="price" placeholder="Price..."
+											   autocomplete="off" class="form-control" />
+									</div>
+								</div>
+							</form>
+							</tbody>
+
+							</tbody>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+
+</html>
