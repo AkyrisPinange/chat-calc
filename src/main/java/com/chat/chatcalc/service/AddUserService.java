@@ -11,10 +11,10 @@ public class AddUserService {
 
     public ChatMessage addUser(SimpMessageHeaderAccessor headerAccessor,
                                ChatMessage chatMessage){
-        String username = (String) chatMessage.getSender();
+        String username = (String) chatMessage.getUsername();
         ChatMessage.builder()
                 .type(MessageType.JOIN)
-                .sender(username)
+                .username(username)
                 .build();
         return  chatMessage;
     }

@@ -2,6 +2,9 @@ package com.chat.chatcalc.chat;
 
 
 import com.chat.chatcalc.model.ChatMessage;
+import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.model.CreateRoom;
+import com.chat.chatcalc.service.ChatService;
 import com.chat.chatcalc.service.PriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,17 +18,20 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
 
     private final PriceService priceService;
+    private final ChatService createRoomService;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")// endpoint webSocket
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
                 return chatMessage;
     }
+
     @MessageMapping("/chat.sendPrice")
     @SendTo("/topic/public")// endpoint webSocket
     public ChatMessage sendPrice(@Payload ChatMessage chatMessage){
         return  priceService.calcPrice(chatMessage);
     }
+
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")// endpoint webSocket
     public ChatMessage addUser(
@@ -33,8 +39,18 @@ public class ChatController {
             SimpMessageHeaderAccessor headerAccessor
     ) {
         // Add username in webSocket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getUsername());
         return  chatMessage;
+    }
+
+    @MessageMapping("/chat.createChat")
+    @SendTo("/topic/public")// endpoint webSocket
+    public ChatMessage creatRoom(
+            @Payload CreateRoom createRoom,
+            SimpMessageHeaderAccessor headerAccessor
+    ) {
+
+        return createRoomService.createChat(createRoom, headerAccessor);
     }
 
 }
