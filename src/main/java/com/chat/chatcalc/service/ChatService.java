@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,20 +26,17 @@ public class ChatService {
     @Autowired
     private ChatsRepository chatsRepository;
 
+
+
     public ChatMessage createChat(CreateRoom createRoom, SimpMessageHeaderAccessor headerAccessor) {
-        Optional<User> userOptional = userRepository.findById(createRoom.getUser_id());
+        User user = userRepository
+                .findById(createRoom.getUser_id())
+                .orElse(null);
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            Chats chat = saveChat(user, createRoom);
+        if (user != null) {
+            Chats chat = saveChat(user, createRoom, headerAccessor);
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setContent("Sala criada com sucesso");
-            chatMessage.setChat_id(chat.get_id());
-            chatMessage.set_id(UUID.randomUUID().toString());
-            chatMessage.setUsername(user.getUsername());
-            chatMessage.setTimestemp(new Date().toString());
-            chatMessage.setType(MessageType.JOIN);
+            ChatMessage chatMessage = createChatMessage("Sala criada com sucesso", chat, user );
 
             headerAccessor.getSessionAttributes().put("username", user.getUsername());
 
@@ -49,25 +46,42 @@ public class ChatService {
         return null;
     }
 
-    private Chats saveChat(User user, CreateRoom createRoom) {
-        Participants newParticipant = new Participants();
-        newParticipant.setRole("creator");
-        newParticipant.setId_user(user.get_id());
+    private ChatMessage createChatMessage(String content, Chats chat, User user) {
+        return new ChatMessage(
+                UUID.randomUUID().toString(),
+                chat.get_id(),
+                content,
+                user.getUsername(),
+                new Date().toString(),
+                MessageType.JOIN);
+    }
 
-        Chats newChat = new Chats();
-        newChat.set_id(UUID.randomUUID().toString());
-        newChat.setTitle(createRoom.getTitle());
-        newChat.getParticipants().add(newParticipant);
+    private Chats saveChat(User user, CreateRoom createRoom, SimpMessageHeaderAccessor headerAccessor) {
+        // seta novo participante
+        Participants newParticipant =
+                new Participants(user.get_id(), "creator");
 
+        // seta novo chat
+        Chats newChat = new Chats(
+                UUID.randomUUID().toString(),
+                createRoom.getTitle(),
+                headerAccessor.getSessionId(),
+                Collections.singletonList(newParticipant));
+
+        // cria novo chat
         Chats savedChat = chatsRepository.save(newChat);
 
-        ChatReference chatReference = new ChatReference();
-        chatReference.setChat_id(savedChat.get_id());
-        chatReference.setRole("creator");
-        user.getChats().add(chatReference);
+        // referencia chat dentro do user
+        ChatReference chatReference = new ChatReference(
+                savedChat.get_id(),
+                "creator"
+                );
 
+        user.getChats().add(chatReference);
+        // cria novo chat
         userRepository.save(user);
 
         return savedChat;
     }
+
 }

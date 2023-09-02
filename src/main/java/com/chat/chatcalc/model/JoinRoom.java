@@ -1,18 +1,16 @@
-package com.chat.chatcalc.entiteis;
+package com.chat.chatcalc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatReference {
+public class JoinRoom {
 
     private String chat_id;
-    private String role;
-
+    private String user_id;
 }
