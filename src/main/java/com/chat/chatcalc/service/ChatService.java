@@ -9,23 +9,21 @@ import com.chat.chatcalc.model.ChatMessage;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
+import com.chat.chatcalc.utils.Useful;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+
 import java.util.Date;
 import java.util.UUID;
 
 @Service
 public class ChatService {
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
-    private ChatsRepository chatsRepository;
-
+    private Useful useful;
 
 
     public ChatMessage createChat(CreateRoom createRoom, SimpMessageHeaderAccessor headerAccessor) {
@@ -36,7 +34,7 @@ public class ChatService {
         if (user != null) {
             Chats chat = saveChat(user, createRoom, headerAccessor);
 
-            ChatMessage chatMessage = createChatMessage("Sala criada com sucesso", chat, user );
+            ChatMessage chatMessage = createChatMessage("Sala criada com sucesso", chat, user);
 
             headerAccessor.getSessionAttributes().put("username", user.getUsername());
 
@@ -49,7 +47,7 @@ public class ChatService {
     private ChatMessage createChatMessage(String content, Chats chat, User user) {
         return new ChatMessage(
                 UUID.randomUUID().toString(),
-                chat.get_id(),
+                chat.getId(),
                 content,
                 user.getUsername(),
                 new Date().toString(),
@@ -57,31 +55,22 @@ public class ChatService {
     }
 
     private Chats saveChat(User user, CreateRoom createRoom, SimpMessageHeaderAccessor headerAccessor) {
-        // seta novo participante
-        Participants newParticipant =
-                new Participants(user.get_id(), "creator");
 
-        // seta novo chat
-        Chats newChat = new Chats(
-                UUID.randomUUID().toString(),
-                createRoom.getTitle(),
-                headerAccessor.getSessionId(),
-                Collections.singletonList(newParticipant));
+        // create novo chat
+        Chats newChat =
+                useful.createNewChat(
+                        createRoom.getTitle(),
+                        headerAccessor.getSessionId(),
+                        user.getId(),
+                        "creator");
 
-        // cria novo chat
-        Chats savedChat = chatsRepository.save(newChat);
-
-        // referencia chat dentro do user
-        ChatReference chatReference = new ChatReference(
-                savedChat.get_id(),
-                "creator"
-                );
-
-        user.getChats().add(chatReference);
-        // cria novo chat
-        userRepository.save(user);
-
-        return savedChat;
+        // reference new chat into user
+        User newChatToUser =
+                useful.addNewChatToUser(
+                        user,
+                        newChat.getId(),
+                        "creator");
+        return newChat;
     }
 
 }

@@ -11,5 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SendMessage {
     private String chat_id;
+    private String user_id;
     private String content;
 }

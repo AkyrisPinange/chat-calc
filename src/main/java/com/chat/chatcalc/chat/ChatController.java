@@ -26,20 +26,31 @@ public class ChatController {
     private final JoinChatService joinChatService;
     private final SendMesageService sendMessageService;
 
-    @MessageMapping("/chat/{chatId}/sendMessage")
+
+    @MessageMapping("/chat/createChat") // endpoint Api
+    @SendTo("/topic/chat/public")// endpoint webSocket
+    public ChatMessage createRoom(
+            @Payload CreateRoom createRoom,
+            SimpMessageHeaderAccessor headerAccessor
+    ) {
+
+        return createRoomService.createChat(createRoom, headerAccessor);
+    }
+    @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public ChatMessage sendMessage(SendMessage sendMessage){
-                return sendMessageService.sendMesage(sendMessage);
+    public ChatMessage sendMessage(SendMessage sendMessage) {
+        return sendMessageService.sendMesage(sendMessage);
     }
 
-    @MessageMapping("/chat.sendPrice")
-    @SendTo("/topic/public")// endpoint webSocket
-    public ChatMessage sendPrice(@Payload ChatMessage chatMessage){
-        return  priceService.calcPrice(chatMessage);
+
+    @MessageMapping("/chat.sendPrice") // endpoint Api
+    @SendTo("/topic/chat/{chatId}")// endpoint webSocket
+    public ChatMessage sendPrice(@Payload ChatMessage chatMessage) {
+        return priceService.calcPrice(chatMessage);
     }
 
-    @MessageMapping("/chat/{chatId}/joinChat")
-    @SendTo("/topic/chat/{chatId}")
+    @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
+    @SendTo("/topic/chat/{chatId}") // endpoint webSocket
     public ChatMessage joinChat(
             JoinRoom joinRoom,
             SimpMessageHeaderAccessor headerAccessor
@@ -48,15 +59,4 @@ public class ChatController {
 
         return joinChatService.joinChat(joinRoom);
     }
-
-    @MessageMapping("/chat.createChat")
-    @SendTo("/topic/public")// endpoint webSocket
-    public ChatMessage creatRoom(
-            @Payload CreateRoom createRoom,
-            SimpMessageHeaderAccessor headerAccessor
-    ) {
-
-        return createRoomService.createChat(createRoom, headerAccessor);
-    }
-
 }

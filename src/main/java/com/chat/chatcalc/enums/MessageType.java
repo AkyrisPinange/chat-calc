@@ -6,5 +6,6 @@ public enum MessageType {
     JOIN ,
     LEAVE,
     PRICE,
-    CREATE
+    CREATE,
+    SEND
 }

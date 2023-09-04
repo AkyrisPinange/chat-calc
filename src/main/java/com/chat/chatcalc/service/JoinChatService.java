@@ -47,7 +47,7 @@ public class JoinChatService {
         chatsRepository.save(chat);
 
         ChatReference chatReference = new ChatReference(
-                chat.get_id(),
+                chat.getId(),
                 "participant"
                 );
 
@@ -58,7 +58,7 @@ public class JoinChatService {
 
         return new ChatMessage(
                 UUID.randomUUID().toString(),
-                chat.get_id(),
+                chat.getId(),
                 "entou no chat",
                 user.getUsername(),
                 new Date().toString(),

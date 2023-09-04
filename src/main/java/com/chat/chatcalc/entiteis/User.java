@@ -19,7 +19,7 @@ import java.util.List;
 public class User {
 
     @Id
-    private String _id;
+    private String id;
     private String username;
     private List<ChatReference> chats = new ArrayList<>();
 

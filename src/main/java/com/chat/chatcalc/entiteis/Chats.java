@@ -17,7 +17,7 @@ import java.util.List;
 @Document(collection = "chats")
 public class Chats {
 
-    private String _id;
+    private String id;
     private String title;
     private String session_id;
     private List<Participants> participants = new ArrayList<>();
