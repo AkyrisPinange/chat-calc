@@ -72,7 +72,7 @@ public class Useful {
             randomID.append(randomChar);
         }
 
-        return randomID.toString();
+        return "#" + randomID;
     }
 
 
