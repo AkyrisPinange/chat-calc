@@ -19,6 +19,6 @@ public class Chats {
 
     private String id;
     private String title;
-    private String session_id;
+    private String room_id;
     private List<Participants> participants = new ArrayList<>();
 }

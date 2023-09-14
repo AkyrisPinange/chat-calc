@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -28,7 +29,7 @@ public class Useful {
 
     public Chats createNewChat(
             String title,// title chat
-            String sessionId, // session id
+            String room_id, // session id
             String user_id, // id chat
             String role // creator role
     ) {
@@ -37,7 +38,7 @@ public class Useful {
                 new Chats(
                         UUID.randomUUID().toString(), // random id
                         title,
-                        sessionId,
+                        room_id,
                         Collections.singletonList(newParticipant));
 
         return chatsRepository.save(newChat);
@@ -57,6 +58,21 @@ public class Useful {
         user.getChats().add(newChatReference);
 
         return userRepository.save(user);
+    }
+
+    public String generateRandomID(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder randomID = new StringBuilder();
+
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            char randomChar = characters.charAt(randomIndex);
+            randomID.append(randomChar);
+        }
+
+        return randomID.toString();
     }
 
 

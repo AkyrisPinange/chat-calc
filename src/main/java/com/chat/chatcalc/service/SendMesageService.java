@@ -8,7 +8,8 @@ import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.reporsitory.ChatMessageRepository;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
-import de.huxhorn.sulky.ulid.ULID;
+import com.github.f4b6a3.uuid.UuidCreator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,21 +27,21 @@ public class SendMesageService {
 
     public ChatMessage sendMesage(SendMessage sendMesage) {
 
-        ULID.Value ulidValue = ULID.parseULID(UUID.randomUUID().toString());
+
         User user = userRepository.getUserById(sendMesage.getUser_id());
 
+//        ChatMessage newMessage = new ChatMessage(
+//                UUID.randomUUID().toString(),
+//                sendMesage.getChat_id(),
+//
+//                sendMesage.getContent(),
+//                user.getUsername(),
+//                new Date().toString(),
+//                MessageType.SEND);
 
-        ChatMessage newMessage = new ChatMessage(
-                UUID.randomUUID().toString(),
-                sendMesage.getChat_id(),
-                sendMesage.getContent(),
-                user.getUsername(),
-                new Date().toString(),
-                MessageType.SEND);
-
-        chatMessageRepository.save(newMessage);
-
-        return newMessage;
+//        chatMessageRepository.save(newMessage);
+//
+        return null;
 
 
     }

@@ -28,6 +28,23 @@ $("#btnChatId").on('click', (e) => {
         }));
 })
 
+//Join in new chat
+$("#btnJoin").on('click', (e) => {
+    let userId = $("#userIdJoin").val()
+    let chat_id = $("#chatIdJoin").val()
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chat_id, function (message) {
+        console.log('Recebido mensagem: ' + message.body);
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chat_id + "/joinChat",
+        {}, JSON.stringify({
+            'user_id': userId,
+            'chat_id': chat_id
+        }));
+})
+
 //sende message
 $("#btnChat").on('click', (e) => {
     let chatId = $("#chatMsgId").val()

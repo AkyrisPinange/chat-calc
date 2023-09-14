@@ -59,6 +59,7 @@ public class JoinChatService {
         return new ChatMessage(
                 UUID.randomUUID().toString(),
                 chat.getId(),
+                chat.getRoom_id(),
                 "entou no chat",
                 user.getUsername(),
                 new Date().toString(),

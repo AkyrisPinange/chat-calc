@@ -17,6 +17,7 @@ public class ChatMessage {
     @Id
     private String id;
     private String chat_id;
+    private String room_id;
     private String content;
     private String username;
     private String timestemp;
