@@ -1,5 +1,5 @@
 # Maven specific
-target/
+/target/
 pom.xml.backup
 release.properties
 pom.xml.releaseBackup

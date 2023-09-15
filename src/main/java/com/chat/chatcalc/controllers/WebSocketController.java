@@ -28,20 +28,28 @@ public class ChatController {
 
 
     @MessageMapping("/chat/createChat") // endpoint Api
-    @SendTo("/topic/chat/public")// endpoint webSocket
-    public ChatMessage createRoom(
+    @SendTo("/topic/chat/") // endpoint webSocket
+    public void createRoom(
             @Payload CreateRoom createRoom,
             SimpMessageHeaderAccessor headerAccessor
     ) {
-
-        return createRoomService.createChat(createRoom, headerAccessor);
+        createRoomService.createChat(createRoom, headerAccessor);
     }
+
+    @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
+    @SendTo("/topic/chat/{chatId}") // endpoint webSocket
+    public void joinChat(
+            JoinRoom joinRoom,
+            SimpMessageHeaderAccessor headerAccessor
+    ) throws Exception {
+        joinChatService.joinChat(joinRoom);
+    }
+
     @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public ChatMessage sendMessage(SendMessage sendMessage) {
         return sendMessageService.sendMesage(sendMessage);
     }
-
 
     @MessageMapping("/chat.sendPrice") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
@@ -49,14 +57,5 @@ public class ChatController {
         return priceService.calcPrice(chatMessage);
     }
 
-    @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
-    @SendTo("/topic/chat/{chatId}") // endpoint webSocket
-    public ChatMessage joinChat(
-            JoinRoom joinRoom,
-            SimpMessageHeaderAccessor headerAccessor
-    ) throws Exception {
 
-
-        return joinChatService.joinChat(joinRoom);
-    }
 }
