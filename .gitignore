@@ -17,6 +17,9 @@ pom.xml.versionsBackup
 *.tar.gz
 *.rar
 
+# Ignore application.properties file
+src/main/resources/application.properties
+
 # Eclipse specific
 .classpath
 .project
