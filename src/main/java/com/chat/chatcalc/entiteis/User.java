@@ -18,13 +18,7 @@ import java.util.List;
 @Document(collection = "user")
 public class User {
 
-    @Id
     private String id;
     private String username;
     private List<ChatReference> chats = new ArrayList<>();
-
-
-
-
-
 }

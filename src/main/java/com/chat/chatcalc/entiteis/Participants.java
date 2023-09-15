@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Participants {
 
-    private String id_user;
+    private String userId;
     private String role;
 
 }

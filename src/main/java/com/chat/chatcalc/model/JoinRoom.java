@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class JoinRoom {
 
-    private String chat_id;
-    private String user_id;
+    private String chatId;
+    private String userId;
 }

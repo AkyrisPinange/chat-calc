@@ -1,6 +1,7 @@
 package com.chat.chatcalc.model;
 
 import com.chat.chatcalc.enums.MessageType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Builder
 @Document(collection = "messages")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ChatMessage {
 
     @Id
@@ -22,4 +24,9 @@ public class ChatMessage {
     private String username;
     private String timestemp;
     private MessageType type;
+
+    public ChatMessage(String content, MessageType messageType) {
+        this.content = content;
+        this.type = messageType;
+    }
 }

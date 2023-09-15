@@ -1,4 +1,4 @@
-package com.chat.chatcalc.chat;
+package com.chat.chatcalc.controllers;
 
 
 import com.chat.chatcalc.model.ChatMessage;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class ChatController {
+public class WebSocketController {
 
     private final PriceService priceService;
     private final ChatService createRoomService;

@@ -7,5 +7,6 @@ public enum MessageType {
     LEAVE,
     PRICE,
     CREATE,
-    SEND
+    SEND,
+    ERROR
 }

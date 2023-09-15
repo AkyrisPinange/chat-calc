@@ -72,8 +72,22 @@ public class Useful {
             randomID.append(randomChar);
         }
 
-        return "#" + randomID;
+        return randomID.toString();
     }
 
+    public String generateUniqueRoomId() {
+        String roomId;
+        boolean isUnique;
+
+        do {
+            // Gere um identificador curto aleatório
+            roomId = generateRandomID(7);
+
+            // Verifique a unicidade no banco de dados
+            isUnique = !chatsRepository.existsByRoomId(roomId);
+        } while (!isUnique);
+
+        return roomId;
+    }
 
 }

@@ -20,7 +20,7 @@ public class SendMesageService {
     public ChatMessage sendMesage(SendMessage sendMesage) {
 
 
-        User user = userRepository.getUserById(sendMesage.getUser_id());
+//        User user = userRepository.getUserById(sendMesage.getUser_id());
 
 //        ChatMessage newMessage = new ChatMessage(
 //                UUID.randomUUID().toString(),

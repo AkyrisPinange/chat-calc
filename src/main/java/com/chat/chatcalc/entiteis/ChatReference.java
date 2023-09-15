@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class ChatReference {
 
-    private String chat_id;
+    private String chatId;
     private String role;
 
 }

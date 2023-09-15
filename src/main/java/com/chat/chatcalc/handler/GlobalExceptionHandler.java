@@ -2,7 +2,7 @@ package com.chat.chatcalc.handler;
 
 
 import com.chat.chatcalc.handler.exceptions.ErrorDetails;
-import com.chat.chatcalc.handler.exceptions.UserNotFoundException;
+import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import static com.chat.chatcalc.enums.Errors.CHAT_NOT_FOUND;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorDetails> userNotFoundException(UserNotFoundException ex) {
-        ErrorDetails errorModel = new ErrorDetails(0, ex.getMessage());
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorDetails> userNotFoundException(NotFoundException ex) {
+        ErrorDetails errorModel = new ErrorDetails(200 , ex.getMessage());
 
-        return new ResponseEntity<ErrorDetails>(errorModel, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ErrorDetails>(errorModel, HttpStatus.OK);
     }
 
     @ExceptionHandler(UserPasswordException.class)
@@ -36,7 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globleExcpetionHandler(Exception ex) {
-        ErrorDetails errorModel = new ErrorDetails(0, ex.getMessage());
+        ErrorDetails errorModel = new ErrorDetails(500, ex.getMessage());
         return new ResponseEntity<>(errorModel, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }

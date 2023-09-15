@@ -1,2 +1,5 @@
-package com.chat.chatcalc.enums;public class Errors {
+package com.chat.chatcalc.enums;
+
+public enum Errors {
+    CHAT_NOT_FOUND
 }

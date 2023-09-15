@@ -7,5 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserPasswordException extends RuntimeException{
     public UserPasswordException(String message){
         super(message);
-    }   
+    }
+
+
+
 }
