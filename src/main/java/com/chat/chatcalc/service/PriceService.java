@@ -1,7 +1,7 @@
 package com.chat.chatcalc.service;
 
 
-import com.chat.chatcalc.model.ChatMessage;
+import com.chat.chatcalc.entiteis.ChatMessage;
 import org.springframework.stereotype.Service;
 
 @Service

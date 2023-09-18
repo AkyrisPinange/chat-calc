@@ -17,33 +17,52 @@ $("#btnChatId").on('click', (e) => {
     let title = $("#title").val()
 
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/chat/public', function (message) {
+    stompClient.subscribe('/topic/chat/' + userId, function (message) {
         console.log('Recebido mensagem: ' + message.body);
     });
     // Tell your username to the server
     stompClient.send("/app/chat/createChat",
         {}, JSON.stringify({
-            'user_id': userId,
+            'userId': userId,
             'title': title
         }));
 })
 
 //Join in new chat
 $("#btnJoin").on('click', (e) => {
-    let userId = $("#userIdJoin").val()
-    let chat_id = $("#chatIdJoin").val()
+    let roomId = $("#roomId").val()
+    let chat
 
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/chat/' + chat_id, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
-    });
-    // Tell your username to the server
-    stompClient.send("/app/chat/" + chat_id + "/joinChat",
-        {}, JSON.stringify({
-            'user_id': userId,
-            'chat_id': chat_id
-        }));
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/chat/getChatByRoomId?roomId=" + roomId, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            chat = result; 
+            joinChat( JSON.parse(chat))
+            console.log('Chat:', chat);
+        })
+        .catch(error => console.log('error', error))
+
 })
+
+function joinChat(chat) {
+    let userId = $("#userIdJoin").val()
+
+        // Subscribe to the Public Topic
+        stompClient.subscribe('/topic/chat/' + chat.objetoRetorno.id, function (message) {
+            console.log('Recebido mensagem: ' + message.body);
+        });
+        // Tell your username to the server
+        stompClient.send("/app/chat/" + chat.objetoRetorno.id + "/joinChat",
+            {}, JSON.stringify({
+                'userId': userId,
+                'chatId': chat.objetoRetorno.id
+            }));
+}
 
 //sende message
 $("#btnChat").on('click', (e) => {

@@ -1,7 +1,6 @@
 package com.chat.chatcalc.service;
 
-import com.chat.chatcalc.entiteis.User;
-import com.chat.chatcalc.model.ChatMessage;
+import com.chat.chatcalc.entiteis.ChatMessage;
 import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.reporsitory.ChatMessageRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;

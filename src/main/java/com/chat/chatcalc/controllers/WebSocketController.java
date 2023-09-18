@@ -1,7 +1,7 @@
 package com.chat.chatcalc.controllers;
 
 
-import com.chat.chatcalc.model.ChatMessage;
+import com.chat.chatcalc.entiteis.ChatMessage;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.model.SendMessage;

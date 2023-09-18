@@ -28,17 +28,17 @@ public class Useful {
     }
 
     public Chats createNewChat(
-            String title,// title chat
-            String room_id, // session id
-            String user_id, // id chat
+            String roomName,// title chat
+            String roomId, // session id
+            String userId, // id chat
             String role // creator role
     ) {
-        Participants newParticipant = new Participants(user_id, role);
+        Participants newParticipant = new Participants(userId, role);
         Chats newChat =
                 new Chats(
                         UUID.randomUUID().toString(), // random id
-                        title,
-                        room_id,
+                        roomName,
+                        roomId,
                         Collections.singletonList(newParticipant));
 
         return chatsRepository.save(newChat);

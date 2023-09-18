@@ -4,7 +4,7 @@ package com.chat.chatcalc.service;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.model.ChatMessage;
+import com.chat.chatcalc.entiteis.ChatMessage;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,6 @@ public class WebSocktService {
                 new ChatMessage(
                         UUID.randomUUID().toString(),
                         chat.getId(),
-                        chat.getRoomId(), // Assuming user has a roomId field
                         content,
                         user.getUsername(),
                         new Date().toString(),

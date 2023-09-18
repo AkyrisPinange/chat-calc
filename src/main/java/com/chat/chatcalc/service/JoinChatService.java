@@ -4,20 +4,11 @@ import com.chat.chatcalc.entiteis.ChatReference;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Participants;
 import com.chat.chatcalc.entiteis.User;
-import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.model.ChatMessage;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketSession;
-
-import java.util.Date;
-import java.util.UUID;
 
 
 @Service

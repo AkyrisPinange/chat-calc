@@ -1,8 +1,7 @@
 package com.chat.chatcalc.config;
 
 import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.model.ChatMessage;
-import jakarta.websocket.Session;
+import com.chat.chatcalc.entiteis.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

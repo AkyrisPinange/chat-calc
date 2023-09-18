@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SendMessage {
-    private String chat_id;
-    private String user_id;
+    private String chatId;
+    private String userId;
     private String content;
 }

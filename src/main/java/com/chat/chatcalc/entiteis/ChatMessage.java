@@ -1,4 +1,4 @@
-package com.chat.chatcalc.model;
+package com.chat.chatcalc.entiteis;
 
 import com.chat.chatcalc.enums.MessageType;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,11 +18,10 @@ public class ChatMessage {
 
     @Id
     private String id;
-    private String chat_id;
-    private String room_id;
+    private String chatId;
     private String content;
     private String username;
-    private String timestemp;
+    private String timestamp;
     private MessageType type;
 
     public ChatMessage(String content, MessageType messageType) {

@@ -21,12 +21,19 @@ public class Chats {
 
     @Id
     private String id;
-    private String title;
+    private String roomName;
     private String roomId;
     private List<Participants> participants = new ArrayList<>();
+    private List<ChatMessage> messages = new ArrayList<>();
 
-    public Chats(String id, String title){
+    public Chats(String id, String roomName){
         this.id = id;
-        this.title = title;
+        this.roomName = roomName;
+    }
+    public Chats(String id, String roomName, String roomId, List<Participants> participants){
+        this.id = id;
+        this.roomName = roomName;
+        this.roomId = roomId;
+        this.participants = participants;
     }
 }

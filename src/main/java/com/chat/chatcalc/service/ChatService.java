@@ -62,7 +62,7 @@ public class ChatService {
 
         Chats chat = chatsRepository.getChatByRoomId(roomId);
         if (chat != null) {
-            return new Chats(chat.getId(), chat.getTitle());
+            return new Chats(chat.getId(), chat.getRoomName());
         } else {
             throw new NotFoundException("Chat not found");
         }
