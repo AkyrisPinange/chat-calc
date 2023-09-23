@@ -14,5 +14,4 @@ public class Participants {
 
     private String userId;
     private String role;
-
 }

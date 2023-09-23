@@ -9,7 +9,7 @@ import com.chat.chatcalc.service.ChatService;
 
 import com.chat.chatcalc.service.JoinChatService;
 import com.chat.chatcalc.service.PriceService;
-import com.chat.chatcalc.service.SendMesageService;
+import com.chat.chatcalc.service.SendMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -24,7 +24,7 @@ public class WebSocketController {
     private final PriceService priceService;
     private final ChatService createRoomService;
     private final JoinChatService joinChatService;
-    private final SendMesageService sendMessageService;
+    private final SendMessageService sendMessageService;
 
 
     @MessageMapping("/chat/createChat") // endpoint Api
@@ -33,7 +33,7 @@ public class WebSocketController {
             @Payload CreateRoom createRoom,
             SimpMessageHeaderAccessor headerAccessor
     ) {
-        createRoomService.createChat(createRoom, headerAccessor);
+        createRoomService.createChat(createRoom);
     }
 
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
@@ -47,8 +47,8 @@ public class WebSocketController {
 
     @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public ChatMessage sendMessage(SendMessage sendMessage) {
-        return sendMessageService.sendMesage(sendMessage);
+    public void sendMessage(SendMessage sendMessage) {
+        sendMessageService.sendMessage(sendMessage);
     }
 
     @MessageMapping("/chat.sendPrice") // endpoint Api

@@ -4,6 +4,7 @@ import com.chat.chatcalc.entiteis.ChatReference;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Participants;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
@@ -26,33 +27,41 @@ public class JoinChatService {
     }
 
     public void joinChat(JoinRoom joinRoom) {
-        Chats chat = chatsRepository.findById(joinRoom.getChatId()).orElse(null);
+        Chats chat = getChatById(joinRoom.getChatId());
+        User user = getUserById(joinRoom.getUserId(), joinRoom.getChatId());
 
-        assert chat != null;
+        if (chat != null && user != null) {
+            if (!isUserParticipant(chat, user)) {
+                Participants newParticipant = new Participants(joinRoom.getUserId(), "participant");
+                chat.getParticipants().add(newParticipant);
+                chatsRepository.save(chat);
 
-        boolean isParticipant = isUserParticipant(chat.getRoomId(), joinRoom.getUserId());
-
-        if (!isParticipant) {
-            Participants newParticipant = new Participants(joinRoom.getUserId(), "participant");
-            chat.getParticipants().add(newParticipant);
-            chatsRepository.save(chat);
-
-            ChatReference chatReference = new ChatReference(chat.getId(), "participant");
-            User user = userRepository.findById(joinRoom.getUserId()).orElse(null);
-
-            if (user != null) {
+                ChatReference chatReference = new ChatReference(chat.getId(), "participant");
                 user.getChats().add(chatReference);
                 userRepository.save(user);
-                webSocktService.joinChatMessage(chat, user, "User :" + user.getUsername() + " join!");
+
+                webSocktService.joinChatMessage(chat, user, "User: " + user.getUsername() + " join!");
             } else {
-                webSocktService.errorMessageByChatId(chat.getId(), "User not found");
+                webSocktService.errorMessageByChatId(chat.getId(), "User is already a participant in this chat");
             }
-        } else {
-            webSocktService.errorMessageByChatId(chat.getId(), "User is already a participant in this chat");
         }
     }
 
-    private Boolean isUserParticipant(String chatId, String userId) {
-        return chatsRepository.findByRoomIdAndParticipantUserId(chatId, userId) != null;
+    private Chats getChatById(String chatId) {
+        return chatsRepository.findById(chatId)
+                .orElseThrow(() -> new NotFoundException("Chat not found"));
+    }
+
+    private User getUserById(String userId, String chatId) {
+        return userRepository.findById(userId)
+                .orElseGet(() -> {
+                    webSocktService.errorMessageByChatId(chatId, "User not found");
+                    return null;
+                });
+    }
+
+    private boolean isUserParticipant(Chats chat, User user) {
+        return chat.getParticipants().stream()
+                .anyMatch(participant -> participant.getUserId().equals(user.getId()));
     }
 }

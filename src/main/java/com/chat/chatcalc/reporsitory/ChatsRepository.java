@@ -4,8 +4,6 @@ import com.chat.chatcalc.entiteis.Chats;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import java.util.Optional;
-
 public interface ChatsRepository extends MongoRepository<Chats,String> {
 
     Chats getChatByRoomId(String roomId);

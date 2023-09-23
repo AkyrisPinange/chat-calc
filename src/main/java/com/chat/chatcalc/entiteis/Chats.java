@@ -15,8 +15,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "chats")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Document(collection = "chats")
 public class Chats {
 
     @Id

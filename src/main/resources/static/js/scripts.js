@@ -77,9 +77,9 @@ $("#btnChat").on('click', (e) => {
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/sendMessage",
         {}, JSON.stringify({
-            'chat_id': chatId,
+            'chatId': chatId,
             'content': message,
-            'user_id': userId
+            'userId': userId
         }));
 })
 
