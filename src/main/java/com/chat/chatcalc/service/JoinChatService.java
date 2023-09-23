@@ -17,13 +17,13 @@ public class JoinChatService {
 
     private final ChatsRepository chatsRepository;
     private final UserRepository userRepository;
-    private final WebSocktService webSocktService;
+    private final WebSocketService webSocketService;
 
     @Autowired
-    public JoinChatService(ChatsRepository chatsRepository, UserRepository userRepository, WebSocktService webSocktService) {
+    public JoinChatService(ChatsRepository chatsRepository, UserRepository userRepository, WebSocketService webSocketService) {
         this.chatsRepository = chatsRepository;
         this.userRepository = userRepository;
-        this.webSocktService = webSocktService;
+        this.webSocketService = webSocketService;
     }
 
     public void joinChat(JoinRoom joinRoom) {
@@ -40,22 +40,22 @@ public class JoinChatService {
                 user.getChats().add(chatReference);
                 userRepository.save(user);
 
-                webSocktService.joinChatMessage(chat, user, "User: " + user.getUsername() + " join!");
+                webSocketService.joinChatMessage(chat, user,  user.getUsername() + " entrou!");
             } else {
-                webSocktService.errorMessageByChatId(chat.getId(), "User is already a participant in this chat");
+                webSocketService.errorMessageByChatId(chat.getId(), "Usuário já participa do chat");
             }
         }
     }
 
     private Chats getChatById(String chatId) {
         return chatsRepository.findById(chatId)
-                .orElseThrow(() -> new NotFoundException("Chat not found"));
+                .orElseThrow(() -> new NotFoundException("Chat não foi encontrado"));
     }
 
     private User getUserById(String userId, String chatId) {
         return userRepository.findById(userId)
                 .orElseGet(() -> {
-                    webSocktService.errorMessageByChatId(chatId, "User not found");
+                    webSocketService.errorMessageByChatId(chatId, "Usuário Chat não foi encontrado");
                     return null;
                 });
     }

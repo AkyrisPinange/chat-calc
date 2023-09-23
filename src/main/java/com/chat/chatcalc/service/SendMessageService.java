@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class SendMessageService {
 
-    private final WebSocktService webSocktService;
+    private final WebSocketService webSocketService;
     private final DataRetrievalUtil dataRetrievalUtil;
 
     @Autowired
-    public SendMessageService(DataRetrievalUtil dataRetrievalUtil, WebSocktService webSocktService) {
-        this.webSocktService = webSocktService;
+    public SendMessageService(DataRetrievalUtil dataRetrievalUtil, WebSocketService webSocketService) {
+        this.webSocketService = webSocketService;
         this.dataRetrievalUtil = dataRetrievalUtil;
     }
 
@@ -23,6 +23,6 @@ public class SendMessageService {
         User user = dataRetrievalUtil.getUser(sendMessage.getUserId(), sendMessage.getChatId());
         Chats chat = dataRetrievalUtil.getChat(sendMessage.getChatId());
 
-        webSocktService.sendChatMessage(chat, user, sendMessage.getContent());
+        webSocketService.sendChatMessage(chat, user, sendMessage.getContent());
     }
 }

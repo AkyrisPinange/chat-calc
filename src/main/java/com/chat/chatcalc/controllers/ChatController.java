@@ -19,7 +19,7 @@ public class ChatController {
 
     @GetMapping("/chat/getChatByRoomId") // endpoint Api
     @ResponseBody
-    public ResponseEntity<SuccessResponse<Chats>> createRoom(
+    public ResponseEntity<SuccessResponse<Chats>> getRoom(
             @RequestParam(value = "roomId") final String roomId
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Chat Encontrado!", chatService.getChatByRoomId(roomId)));

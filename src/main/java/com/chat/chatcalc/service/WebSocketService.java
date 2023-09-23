@@ -15,13 +15,13 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
-public class WebSocktService {
+public class WebSocketService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatsRepository chatsRepository;
-    @Value("${websocket.uri.prefix}") // Lê o valor da propriedade de configuração
+    @Value("${websocket.uri.prefix}")
     private String path;
 
-    public WebSocktService(SimpMessagingTemplate messagingTemplate, ChatsRepository chatsRepository) {
+    public WebSocketService(SimpMessagingTemplate messagingTemplate, ChatsRepository chatsRepository) {
         this.messagingTemplate = messagingTemplate;
         this.chatsRepository = chatsRepository;
     }

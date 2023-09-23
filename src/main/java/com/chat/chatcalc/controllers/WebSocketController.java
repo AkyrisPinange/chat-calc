@@ -1,12 +1,10 @@
 package com.chat.chatcalc.controllers;
 
 
-import com.chat.chatcalc.entiteis.ChatMessage;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.service.ChatService;
-
 import com.chat.chatcalc.service.JoinChatService;
 import com.chat.chatcalc.service.SendMessageService;
 import lombok.RequiredArgsConstructor;

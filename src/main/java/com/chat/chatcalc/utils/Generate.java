@@ -33,7 +33,7 @@ public class Generate {
             // Gere um identificador curto aleatório
             roomId = generateRandomID(7);
 
-            // Verifique a unicidade no banco de dados
+            // Verifica a unicidade no banco de dados
             isUnique = !chatsRepository.existsByRoomId(roomId);
         } while (!isUnique);
 

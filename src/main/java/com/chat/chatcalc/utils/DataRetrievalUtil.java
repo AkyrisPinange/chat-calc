@@ -4,7 +4,7 @@ import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
-import com.chat.chatcalc.service.WebSocktService;
+import com.chat.chatcalc.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +15,12 @@ public class DataRetrievalUtil {
     @Autowired
     private ChatsRepository chatsRepository;
     @Autowired
-    private WebSocktService webSocktService;
+    private WebSocketService webSocketService;
 
     public Chats getChat(String chatId) {
         return chatsRepository.findById(chatId)
                 .orElseGet(() -> {
-                    webSocktService.errorMessageByChatId(chatId, "User not found");
+                    webSocketService.errorMessageByChatId(chatId, "User not found");
                     return null;
                 });
     }
@@ -28,7 +28,7 @@ public class DataRetrievalUtil {
     public User getUser(String userId, String chatId) {
         return userRepository.findById(userId)
                 .orElseGet(() -> {
-                    webSocktService.errorMessageByChatId(chatId, "User not found");
+                    webSocketService.errorMessageByChatId(chatId, "User not found");
                     return null;
                 });
     }

@@ -16,11 +16,11 @@ public class ChatService {
     private final UserRepository userRepository;
     private final ChatManipulationUtil chatManipulationUtil;
     private final Generate generate;
-    private final WebSocktService webSocktService;
+    private final WebSocketService webSocktService;
     private final ChatsRepository chatsRepository;
 
     @Autowired
-    public ChatService(UserRepository userRepository, ChatManipulationUtil chatManipulationUtil, WebSocktService webSocktService,
+    public ChatService(UserRepository userRepository, ChatManipulationUtil chatManipulationUtil, WebSocketService webSocktService,
                        ChatsRepository chatsRepository, Generate generate) {
         this.userRepository = userRepository;
         this.chatManipulationUtil = chatManipulationUtil;
