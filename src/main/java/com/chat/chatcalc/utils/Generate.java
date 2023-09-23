@@ -10,12 +10,11 @@ import java.util.Random;
 public class Generate {
     @Autowired
     private ChatsRepository chatsRepository;
-
+    private final Random random = new Random();
     public String generateRandomID(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder randomID = new StringBuilder();
 
-        Random random = new Random();
 
         for (int i = 0; i < length; i++) {
             int randomIndex = random.nextInt(characters.length());

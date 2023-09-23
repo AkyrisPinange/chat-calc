@@ -3,22 +3,20 @@ package com.chat.chatcalc.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Getter
 @Setter
-public class SuccessResponse<T> implements Serializable {
+public class SuccessResponse<T>  {
 
-    private String codigo;
+    private String code;
 
-    private String mensagem;
+    private String message;
 
-    private T objetoRetorno;
+    private T data;
 
-    public SuccessResponse(String codigo, String mensagem, T objetoRetorno) {
-        this.codigo = codigo;
-        this.mensagem = mensagem;
-        this.objetoRetorno = objetoRetorno;
+    public SuccessResponse(String code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
 }

@@ -6,10 +6,9 @@ import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
-import com.chat.chatcalc.utils.Generate;
 import com.chat.chatcalc.utils.ChatManipulationUtil;
+import com.chat.chatcalc.utils.Generate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Service;
 
 @Service

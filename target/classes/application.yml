@@ -6,3 +6,7 @@ spring:
     mongodb:
       uri: ${URL_DATABASE}
 
+websocket:
+  uri:
+    prefix: /topic/chat/
+

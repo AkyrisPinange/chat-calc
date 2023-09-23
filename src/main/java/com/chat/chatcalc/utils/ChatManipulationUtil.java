@@ -20,8 +20,10 @@ public class ChatManipulationUtil {
     @Autowired
     private UserRepository userRepository;
 
-    public Participants newParticipant(String user_id, String role) {
-        return new Participants(user_id, role);
+
+    public Participants newParticipant(String userId, String role) {
+
+        return new Participants(userId, role);
     }
 
     // save
@@ -38,10 +40,10 @@ public class ChatManipulationUtil {
     }
 
     public void addNewChatToUser(User user, // User who will enter the chat
-                                 String chat_id, // id the chat
+                                 String chatId, // id the chat
                                  String role // role new user
     ) {
-        ChatReference newChatReference = new ChatReference(chat_id, role);
+        ChatReference newChatReference = new ChatReference(chatId, role);
 
         user.getChats().add(newChatReference);
 

@@ -8,7 +8,6 @@ import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.service.ChatService;
 
 import com.chat.chatcalc.service.JoinChatService;
-import com.chat.chatcalc.service.PriceService;
 import com.chat.chatcalc.service.SendMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class WebSocketController {
 
-    private final PriceService priceService;
     private final ChatService createRoomService;
     private final JoinChatService joinChatService;
     private final SendMessageService sendMessageService;
@@ -41,7 +39,7 @@ public class WebSocketController {
     public void joinChat(
             JoinRoom joinRoom,
             SimpMessageHeaderAccessor headerAccessor
-    ) throws Exception {
+    ) {
         joinChatService.joinChat(joinRoom);
     }
 
@@ -50,12 +48,4 @@ public class WebSocketController {
     public void sendMessage(SendMessage sendMessage) {
         sendMessageService.sendMessage(sendMessage);
     }
-
-    @MessageMapping("/chat.sendPrice") // endpoint Api
-    @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public ChatMessage sendPrice(@Payload ChatMessage chatMessage) {
-        return priceService.calcPrice(chatMessage);
-    }
-
-
 }
