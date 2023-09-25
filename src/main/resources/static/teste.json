@@ -1,4 +1,58 @@
 {
-    "_id": "1",
-    "username": "akyris"
-}
+    "_id": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+    "roomName": "Primeiro chat",
+    "roomId": "NKF0MGU",
+    "participants": [
+      {
+        "userId": "2",
+        "role": "creator"
+      },
+      {
+        "userId": "1",
+        "role": "participant"
+      }
+    ],
+    "messages": [
+      {
+        "_id": "20a9c7e8-310f-496f-88c1-2caa0a13f04b",
+        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+        "userId": "2",
+        "content": "Sala criada com sucesso",
+        "username": "Paulo",
+        "timestamp": "Sat Sep 23 14:51:01 BRT 2023",
+        "type": "CREATE",
+        "confirmations": []
+      },
+      {
+        "_id": "9a5a368c-724e-4116-aaa9-3f64258c6444",
+        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+        "userId": "1",
+        "content": "User: akyris join!",
+        "username": "akyris",
+        "timestamp": "Sat Sep 23 14:51:23 BRT 2023",
+        "type": "JOIN",
+        "confirmations": []
+      },
+      {
+        "_id": "3d3208ac-9797-4b41-9ef0-21f3e4580f2b",
+        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+        "userId": "2",
+        "content": "Primeira msg ",
+        "username": "Paulo",
+        "timestamp": "Sat Sep 23 14:52:18 BRT 2023",
+        "type": "SEND",
+        "confirmations": []
+      },
+      {
+        "_id": "4e553b48-dff9-4bad-9e0c-17b764be5b8f",
+        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+        "userId": "1",
+        "content": "segunda msg ",
+        "username": "akyris",
+        "timestamp": "Sat Sep 23 14:52:35 BRT 2023",
+        "type": "SEND",
+        "confirmations": []
+      }
+    ],
+    "_class": "com.chat.chatcalc.entiteis.Chats"
+  }

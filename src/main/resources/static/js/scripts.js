@@ -53,14 +53,14 @@ function joinChat(chat) {
     let userId = $("#userIdJoin").val()
 
         // Subscribe to the Public Topic
-        stompClient.subscribe('/topic/chat/' + chat.objetoRetorno.id, function (message) {
+        stompClient.subscribe('/topic/chat/' + chat.data.id, function (message) {
             console.log('Recebido mensagem: ' + message.body);
         });
         // Tell your username to the server
-        stompClient.send("/app/chat/" + chat.objetoRetorno.id + "/joinChat",
+        stompClient.send("/app/chat/" + chat.data.id + "/joinChat",
             {}, JSON.stringify({
                 'userId': userId,
-                'chatId': chat.objetoRetorno.id
+                'chatId': chat.data.id
             }));
 }
 

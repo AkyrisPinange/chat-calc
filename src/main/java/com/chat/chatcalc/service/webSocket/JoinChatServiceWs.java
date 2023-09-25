@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service;
+package com.chat.chatcalc.service.webSocket;
 
 import com.chat.chatcalc.entiteis.ChatReference;
 import com.chat.chatcalc.entiteis.Chats;
@@ -8,19 +8,20 @@ import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
+import com.chat.chatcalc.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class JoinChatService {
+public class JoinChatServiceWs {
 
     private final ChatsRepository chatsRepository;
     private final UserRepository userRepository;
     private final WebSocketService webSocketService;
 
     @Autowired
-    public JoinChatService(ChatsRepository chatsRepository, UserRepository userRepository, WebSocketService webSocketService) {
+    public JoinChatServiceWs(ChatsRepository chatsRepository, UserRepository userRepository, WebSocketService webSocketService) {
         this.chatsRepository = chatsRepository;
         this.userRepository = userRepository;
         this.webSocketService = webSocketService;

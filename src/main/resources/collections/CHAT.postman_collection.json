@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "1e025307-3c53-445c-86ea-3ef2ebd113db",
+		"name": "CHAT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30025588"
+	},
+	"item": [
+		{
+			"name": "check room",
+			"item": [
+				{
+					"name": "return - OK",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/chat/getChatByRoomId?roomId=8FBQ92A",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"chat",
+								"getChatByRoomId"
+							],
+							"query": [
+								{
+									"key": "roomId",
+									"value": "8FBQ92A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return- error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/chat/getChatByRoomId?roomId=ASDDHASD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"chat",
+								"getChatByRoomId"
+							],
+							"query": [
+								{
+									"key": "roomId",
+									"value": "ASDDHASD"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getChats by UserID",
+			"item": [
+				{
+					"name": "get chats - OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/chat/getChatsByIdUser?userId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"chat",
+								"getChatsByIdUser"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chats - error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/chat/getChatsByIdUser?userId=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"chat",
+								"getChatsByIdUser"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get chat content",
+			"item": [
+				{
+					"name": "get chat - OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/chat/getChatById?chatId=00fe667e-5b08-404c-bcb6-10e710f198c0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"chat",
+								"getChatById"
+							],
+							"query": [
+								{
+									"key": "chatId",
+									"value": "00fe667e-5b08-404c-bcb6-10e710f198c0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chat - error",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

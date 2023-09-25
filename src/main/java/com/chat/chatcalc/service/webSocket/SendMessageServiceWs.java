@@ -1,20 +1,21 @@
-package com.chat.chatcalc.service;
+package com.chat.chatcalc.service.webSocket;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.model.SendMessage;
+import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.DataRetrievalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SendMessageService {
+public class SendMessageServiceWs {
 
     private final WebSocketService webSocketService;
     private final DataRetrievalUtil dataRetrievalUtil;
 
     @Autowired
-    public SendMessageService(DataRetrievalUtil dataRetrievalUtil, WebSocketService webSocketService) {
+    public SendMessageServiceWs(DataRetrievalUtil dataRetrievalUtil, WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
         this.dataRetrievalUtil = dataRetrievalUtil;
     }

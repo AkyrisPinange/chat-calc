@@ -4,9 +4,9 @@ package com.chat.chatcalc.controllers;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.model.SendMessage;
-import com.chat.chatcalc.service.ChatService;
-import com.chat.chatcalc.service.JoinChatService;
-import com.chat.chatcalc.service.SendMessageService;
+import com.chat.chatcalc.service.webSocket.ChatServiceWs;
+import com.chat.chatcalc.service.webSocket.JoinChatServiceWs;
+import com.chat.chatcalc.service.webSocket.SendMessageServiceWs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -18,9 +18,9 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class WebSocketController {
 
-    private final ChatService createRoomService;
-    private final JoinChatService joinChatService;
-    private final SendMessageService sendMessageService;
+    private final ChatServiceWs createRoomServiceWs;
+    private final JoinChatServiceWs joinChatServiceWs;
+    private final SendMessageServiceWs sendMessageService;
 
 
     @MessageMapping("/chat/createChat") // endpoint Api
@@ -29,7 +29,7 @@ public class WebSocketController {
             @Payload CreateRoom createRoom,
             SimpMessageHeaderAccessor headerAccessor
     ) {
-        createRoomService.createChat(createRoom);
+        createRoomServiceWs.createChat(createRoom);
     }
 
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
@@ -38,7 +38,7 @@ public class WebSocketController {
             JoinRoom joinRoom,
             SimpMessageHeaderAccessor headerAccessor
     ) {
-        joinChatService.joinChat(joinRoom);
+        joinChatServiceWs.joinChat(joinRoom);
     }
 
     @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
