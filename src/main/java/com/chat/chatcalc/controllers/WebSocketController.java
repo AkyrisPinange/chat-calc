@@ -24,7 +24,7 @@ public class WebSocketController {
 
 
     @MessageMapping("/chat/createChat") // endpoint Api
-    @SendTo("/topic/chat/") // endpoint webSocket
+    @SendTo("/topic/chat/{userId}") // endpoint webSocket
     public void createRoom(
             @Payload CreateRoom createRoom,
             SimpMessageHeaderAccessor headerAccessor
