@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,11 +17,12 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/chat/")
 public class ChatController {
 
     private final ChatService chatService;
 
-    @GetMapping("/chat/getChatByRoomId") // endpoint Api
+    @GetMapping("getChatByRoomId") // endpoint Api
     @ResponseBody
     public ResponseEntity<SuccessResponse<Chats>> getRoom(
             @RequestParam(value = "roomId") final String roomId
@@ -28,7 +30,7 @@ public class ChatController {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Chat Encontrado!", chatService.getChatByRoomId(roomId)));
     }
 
-    @GetMapping("/chat/getChatsByIdUser") // endpoint Api
+    @GetMapping("getChatsByIdUser") // endpoint Api
     @ResponseBody
     public ResponseEntity<SuccessResponse<List<Chats>>> getChats(
             @RequestParam(value = "userId") final String userId
@@ -36,7 +38,7 @@ public class ChatController {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Chats Encontrados!", chatService.getChatsByIdUser(userId)));
     }
 
-    @GetMapping("/chat/getChatById") // endpoint Api
+    @GetMapping("getChatById") // endpoint Api
     @ResponseBody
     public ResponseEntity<SuccessResponse<Optional<Chats>>> getChat(
             @RequestParam(value = "chatId") final String chatId
