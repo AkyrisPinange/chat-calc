@@ -53,14 +53,14 @@ function joinChat(chat) {
     let userId = $("#userIdJoin").val()
 
         // Subscribe to the Public Topic
-        stompClient.subscribe('/topic/chat/' + chat.objetoRetorno.id, function (message) {
+        stompClient.subscribe('/topic/chat/' + chat.data.id, function (message) {
             console.log('Recebido mensagem: ' + message.body);
         });
         // Tell your username to the server
-        stompClient.send("/app/chat/" + chat.objetoRetorno.id + "/joinChat",
+        stompClient.send("/app/chat/" + chat.data.id + "/joinChat",
             {}, JSON.stringify({
                 'userId': userId,
-                'chatId': chat.objetoRetorno.id
+                'chatId': chat.data.id
             }));
 }
 
@@ -77,9 +77,31 @@ $("#btnChat").on('click', (e) => {
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/sendMessage",
         {}, JSON.stringify({
-            'chat_id': chatId,
+            'chatId': chatId,
             'content': message,
-            'user_id': userId
+            'userId': userId
+        }));
+})
+
+//sende message
+$("#btnSpend").on('click', (e) => {
+    let chatId = $("#chatCostId").val();
+    let value = $("#value").val();
+    let quantity = $("#quantity").val();
+    let product = $("#product").val();
+
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chatId, function (message) {
+        console.log('Recebido mensagem: ' + message.body);
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chatId + "/costs",
+        {}, JSON.stringify({
+            'chatId': chatId,
+            'cost': value,
+            'quantity': quantity,
+            'product' : product
         }));
 })
 

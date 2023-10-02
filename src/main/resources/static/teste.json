@@ -1,58 +1,102 @@
 {
-    "_id": "00fe667e-5b08-404c-bcb6-10e710f198c0",
-    "roomName": "Primeiro chat",
-    "roomId": "NKF0MGU",
-    "participants": [
-      {
-        "userId": "2",
-        "role": "creator"
-      },
-      {
-        "userId": "1",
-        "role": "participant"
-      }
-    ],
-    "messages": [
-      {
-        "_id": "20a9c7e8-310f-496f-88c1-2caa0a13f04b",
-        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
-        "userId": "2",
-        "content": "Sala criada com sucesso",
-        "username": "Paulo",
-        "timestamp": "Sat Sep 23 14:51:01 BRT 2023",
-        "type": "CREATE",
-        "confirmations": []
-      },
-      {
-        "_id": "9a5a368c-724e-4116-aaa9-3f64258c6444",
-        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
-        "userId": "1",
-        "content": "User: akyris join!",
-        "username": "akyris",
-        "timestamp": "Sat Sep 23 14:51:23 BRT 2023",
-        "type": "JOIN",
-        "confirmations": []
-      },
-      {
-        "_id": "3d3208ac-9797-4b41-9ef0-21f3e4580f2b",
-        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
-        "userId": "2",
-        "content": "Primeira msg ",
-        "username": "Paulo",
-        "timestamp": "Sat Sep 23 14:52:18 BRT 2023",
-        "type": "SEND",
-        "confirmations": []
-      },
-      {
-        "_id": "4e553b48-dff9-4bad-9e0c-17b764be5b8f",
-        "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
-        "userId": "1",
-        "content": "segunda msg ",
-        "username": "akyris",
-        "timestamp": "Sat Sep 23 14:52:35 BRT 2023",
-        "type": "SEND",
-        "confirmations": []
-      }
-    ],
-    "_class": "com.chat.chatcalc.entiteis.Chats"
-  }
+  "_id": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+  "roomName": "Primeiro chat",
+  "roomId": "NKF0MGU",
+  "participants": [
+    {
+      "userId": "2",
+      "role": "creator"
+    },
+    {
+      "userId": "1",
+      "role": "participant"
+    }
+  ],
+  "messages": [
+    {
+      "_id": "20a9c7e8-310f-496f-88c1-2caa0a13f04b",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "userId": "2",
+      "content": "Sala criada com sucesso",
+      "username": "Paulo",
+      "timestamp": "Sat Sep 23 14:51:01 BRT 2023",
+      "type": "CREATE",
+      "confirmations": []
+    },
+    {
+      "_id": "9a5a368c-724e-4116-aaa9-3f64258c6444",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "userId": "1",
+      "content": "User: akyris join!",
+      "username": "akyris",
+      "timestamp": "Sat Sep 23 14:51:23 BRT 2023",
+      "type": "JOIN",
+      "confirmations": []
+    },
+    {
+      "_id": "3d3208ac-9797-4b41-9ef0-21f3e4580f2b",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "userId": "2",
+      "content": "Primeira msg ",
+      "username": "Paulo",
+      "timestamp": "Sat Sep 23 14:52:18 BRT 2023",
+      "type": "SEND",
+      "confirmations": []
+    },
+    {
+      "_id": "4e553b48-dff9-4bad-9e0c-17b764be5b8f",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "userId": "1",
+      "content": "segunda msg ",
+      "username": "akyris",
+      "timestamp": "Sat Sep 23 14:52:35 BRT 2023",
+      "type": "SEND",
+      "confirmations": []
+    },
+    {
+      "_id": "f46eb7bc-4051-4c67-826c-bfea6da6295a",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "userId": "1",
+      "content": "teste msg",
+      "username": "akyris",
+      "timestamp": "Sat Sep 23 15:47:04 BRT 2023",
+      "type": "SEND",
+      "confirmations": []
+    }
+  ],
+  "costs": [
+    {
+      "_id": "29924837-3243-45b5-a275-b1ab2e191f1e",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "cost": "R$ 3,99",
+      "total": "R$ 19,95",
+      "quantity": "5",
+      "product": "feijao"
+    },
+    {
+      "_id": "42b331b0-1f99-491b-b50b-09dd4711b0a6",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "cost": "R$ 3,50",
+      "total": "R$ 26,95",
+      "quantity": "2",
+      "product": "cerveja"
+    },
+    {
+      "_id": "4f7f8c23-1de6-488a-8859-a7561aeb42c0",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "cost": "R$ 8,50",
+      "total": "R$ 77,95",
+      "quantity": "6",
+      "product": "arroz"
+    },
+    {
+      "_id": "2d71bf39-3c34-47d6-a112-066a0f1c864e",
+      "chatId": "00fe667e-5b08-404c-bcb6-10e710f198c0",
+      "cost": "R$ 10,00",
+      "total": "R$ 87,95",
+      "quantity": "1",
+      "product": "maconha"
+    }
+  ],
+  "_class": "com.chat.chatcalc.entiteis.Chats"
+}

@@ -1,10 +1,12 @@
 package com.chat.chatcalc.controllers;
 
 
+import com.chat.chatcalc.entiteis.Costs;
+import com.chat.chatcalc.model.CostData;
 import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.model.JoinRoom;
-import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.service.webSocket.ChatServiceWs;
+import com.chat.chatcalc.service.webSocket.CostsService;
 import com.chat.chatcalc.service.webSocket.JoinChatServiceWs;
 import com.chat.chatcalc.service.webSocket.SendMessageServiceWs;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,7 @@ public class WebSocketController {
     private final ChatServiceWs createRoomServiceWs;
     private final JoinChatServiceWs joinChatServiceWs;
     private final SendMessageServiceWs sendMessageService;
-
+    private final CostsService costsService;
 
     @MessageMapping("/chat/createChat") // endpoint Api
     @SendTo("/topic/chat/{userId}") // endpoint webSocket
@@ -41,9 +43,9 @@ public class WebSocketController {
         joinChatServiceWs.joinChat(joinRoom);
     }
 
-    @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
+    @MessageMapping("/chat/{chatId}/costs") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public void sendMessage(SendMessage sendMessage) {
-        sendMessageService.sendMessage(sendMessage);
+    public void sendMessage(Costs costs) {
+        costsService.addCostToChat(costs);
     }
 }

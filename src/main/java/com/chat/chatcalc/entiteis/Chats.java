@@ -25,6 +25,7 @@ public class Chats {
     private String roomId;
     private List<Participants> participants = new ArrayList<>();
     private List<ChatMessage> messages = new ArrayList<>();
+    private List<Costs> costs = new ArrayList<>();
 
     public Chats(String id, String roomName){
         this.id = id;
