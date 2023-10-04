@@ -41,7 +41,7 @@ public class JoinChatServiceWs {
                 user.getChats().add(chatReference);
                 userRepository.save(user);
 
-                webSocketService.joinChatMessage(chat, user,  user.getUsername() + " entrou!");
+                webSocketService.joinChatMessage(chat, user,  user.getFirstName() + " entrou!");
             } else {
                 webSocketService.errorMessageByChatId(chat.getId(), "Usuário já participa do chat");
             }

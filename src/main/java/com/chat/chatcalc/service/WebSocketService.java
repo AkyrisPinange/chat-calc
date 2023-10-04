@@ -52,7 +52,7 @@ public class WebSocketService {
                 chat.getId(),
                 user.getId(),
                 content,
-                user.getUsername(),
+                user.getFirstName(),
                 new Date().toString(),
                 messageType);
 
