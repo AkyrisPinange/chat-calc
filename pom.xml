@@ -87,10 +87,10 @@
 				<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version> <!-- Versão do plugin -->
+				<version>3.11.0</version> <!-- Versão do plugin -->
 				<configuration>
-					<source>1.8</source> <!-- Versão do Java source -->
-					<target>1.8</target> <!-- Versão do Java target -->
+					<source>17</source> <!-- Versão do Java source -->
+					<target>17</target> <!-- Versão do Java target -->
 				</configuration>
 			</plugin>
 		</plugins>
