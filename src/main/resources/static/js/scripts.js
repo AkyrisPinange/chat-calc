@@ -7,9 +7,8 @@ $("#connect").on('click', (e) => {
     stompClient = Stomp.over(socket);
 
     stompClient.connect({
-                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNjk2NTE1Mzk3LCJleHAiOjE2OTY2MDE3OTd9.3sufb8NXcTFtIOGmgoUOg-yxkqI8eXSZ1myBBrJMEL',
-                                // Adicione outros headers conforme necessário
-                            }, function (frame) {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNjk2NTE1Mzk3LCJleHAiOjE2OTY2MDE3OTd9.3sufb8NXcTFtIOGmgoUOg-yxkqI8eXSZ1myBBrJMEL',
+    }, function (frame) {
         console.log('Conectado: ' + frame);
     });
 })//
@@ -44,8 +43,8 @@ $("#btnJoin").on('click', (e) => {
     fetch("http://localhost:8080/chat/getChatByRoomId?roomId=" + roomId, requestOptions)
         .then(response => response.text())
         .then(result => {
-            chat = result; 
-            joinChat( JSON.parse(chat))
+            chat = result;
+            joinChat(JSON.parse(chat))
             console.log('Chat:', chat);
         })
         .catch(error => console.log('error', error))
@@ -55,16 +54,16 @@ $("#btnJoin").on('click', (e) => {
 function joinChat(chat) {
     let userId = $("#userIdJoin").val()
 
-        // Subscribe to the Public Topic
-        stompClient.subscribe('/topic/chat/' + chat.data.id, function (message) {
-            console.log('Recebido mensagem: ' + message.body);
-        });
-        // Tell your username to the server
-        stompClient.send("/app/chat/" + chat.data.id + "/joinChat",
-            {}, JSON.stringify({
-                'userId': userId,
-                'chatId': chat.data.id
-            }));
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chat.data.id, function (message) {
+        console.log('Recebido mensagem: ' + message.body);
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chat.data.id + "/joinChat",
+        {}, JSON.stringify({
+            'userId': userId,
+            'chatId': chat.data.id
+        }));
 }
 
 //sende message
@@ -104,7 +103,7 @@ $("#btnSpend").on('click', (e) => {
             'chatId': chatId,
             'cost': value,
             'quantity': quantity,
-            'product' : product
+            'product': product
         }));
 })
 
