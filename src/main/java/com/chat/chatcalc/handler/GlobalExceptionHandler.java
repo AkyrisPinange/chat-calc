@@ -4,6 +4,7 @@ package com.chat.chatcalc.handler;
 import com.chat.chatcalc.handler.exceptions.ErrorDetails;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
+import com.chat.chatcalc.handler.exceptions.UserUnauthorizedException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -25,7 +26,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errorModel, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(UserUnauthorizedException.class)
+    public ResponseEntity<ErrorDetails> userUnauthorizedException(UserUnauthorizedException ex) {
+        ErrorDetails errorModel = new ErrorDetails(403 , ex.getMessage());
 
+        return new ResponseEntity<>(errorModel, HttpStatus.UNAUTHORIZED);
+    }
     @ExceptionHandler(UserPasswordException.class)
     public ResponseEntity<ErrorDetails> userPasswordException(UserPasswordException ex) {
         ErrorDetails errorModel = new ErrorDetails(0, ex.getMessage());

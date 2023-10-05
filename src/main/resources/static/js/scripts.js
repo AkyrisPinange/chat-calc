@@ -6,7 +6,10 @@ $("#connect").on('click', (e) => {
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
 
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({
+                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNjk2NTE1Mzk3LCJleHAiOjE2OTY2MDE3OTd9.3sufb8NXcTFtIOGmgoUOg-yxkqI8eXSZ1myBBrJMEL',
+                                // Adicione outros headers conforme necessário
+                            }, function (frame) {
         console.log('Conectado: ' + frame);
     });
 })//
