@@ -3,7 +3,7 @@ package com.chat.chatcalc.filters;
 import com.chat.chatcalc.handler.exceptions.UserUnauthorizedException;
 import com.chat.chatcalc.service.UserService;
 import com.chat.chatcalc.service.auth.JwtService;
-import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,8 +64,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     throw new UserUnauthorizedException("Token invalid ou session expiration");
                 }
             }
-        } catch (Exception e) {
-            throw new UserUnauthorizedException("Token invalid ou session expiration");
+        } catch (SignatureException e) {
+            throw new SignatureException("Token invalid ou session expiration");
         }
         filterChain.doFilter(request, response);
     }

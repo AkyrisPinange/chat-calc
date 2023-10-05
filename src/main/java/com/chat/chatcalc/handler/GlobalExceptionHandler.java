@@ -5,6 +5,7 @@ import com.chat.chatcalc.handler.exceptions.ErrorDetails;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.handler.exceptions.UserUnauthorizedException;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,11 +27,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errorModel, HttpStatus.NOT_FOUND);
     }
-    @ExceptionHandler(UserUnauthorizedException.class)
-    public ResponseEntity<ErrorDetails> userUnauthorizedException(UserUnauthorizedException ex) {
-        ErrorDetails errorModel = new ErrorDetails(403 , ex.getMessage());
+    @ExceptionHandler(SignatureException.class)
+    public ResponseEntity<ErrorDetails> signatureException(SignatureException ex) {
+        ErrorDetails errorModel = new ErrorDetails(403 , "Assinatura JWT inválida");
 
-        return new ResponseEntity<>(errorModel, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(errorModel, HttpStatus.FORBIDDEN); // Use o código de status apropriado
     }
     @ExceptionHandler(UserPasswordException.class)
     public ResponseEntity<ErrorDetails> userPasswordException(UserPasswordException ex) {
