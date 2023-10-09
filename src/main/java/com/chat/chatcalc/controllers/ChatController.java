@@ -2,15 +2,17 @@ package com.chat.chatcalc.controllers;
 
 
 import com.chat.chatcalc.entiteis.Chats;
+import com.chat.chatcalc.model.CreateRoom;
 import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.service.ChatService;
+import com.chat.chatcalc.service.CreateChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,16 @@ import java.util.Optional;
 public class ChatController {
 
     private final ChatService chatService;
+    private final CreateChatService createRoomServiceWs;
+
+
+    @PostMapping("createChat") // endpoint Api
+    public  ResponseEntity<SuccessResponse<Chats>> createRoom(
+            @RequestBody CreateRoom createRoom
+    ) {
+        return ResponseEntity.ok(new SuccessResponse<>("201", "Chat criado com sucesso", createRoomServiceWs.createChat(createRoom)));
+
+    }
 
     @GetMapping("getChatByRoomId") // endpoint Api
     @ResponseBody

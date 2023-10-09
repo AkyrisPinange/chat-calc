@@ -17,6 +17,6 @@ public class ChatCalcApplication {
 		LOGGER.info("*******************VESÃO 1 *******************************************");
 	}
 
-	
+
 
 }

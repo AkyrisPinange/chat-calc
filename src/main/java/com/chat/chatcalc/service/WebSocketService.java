@@ -26,28 +26,21 @@ public class WebSocketService {
         this.chatsRepository = chatsRepository;
     }
 
-    public void createChatMessage(Chats chat, User user, String content) {
-        sendMessage(path + user.getId(), user, chat, content, MessageType.CREATE);
-    }
-
-    public void sendChatMessage(Chats chat, User user, String content) {
-        sendMessage(path + chat.getId(), user, chat, content, MessageType.SEND);
-    }
-
-    public void joinChatMessage(Chats chat, User user, String content) {
-        sendMessage(path + chat.getId(), user, chat, content, MessageType.JOIN);
-    }
 
     public void errorMessageByChatId(String chatId, String message) {
-        messagingTemplate.convertAndSend(path + chatId, new ChatMessage(message, MessageType.ERROR));
+        messagingTemplate.convertAndSend(getChatPath(chatId), new ChatMessage(message, MessageType.ERROR));
     }
 
-    public void errorMessageByUser(String idUser, String message) {
-        messagingTemplate.convertAndSend(path + idUser, new ChatMessage(message, MessageType.ERROR));
+    public void sendMessage(User user, Chats chat, String content, MessageType messageType) {
+        ChatMessage message = createChatMessage(user, chat, content, messageType);
+        chat.getMessages().add(message);
+        chatsRepository.save(chat);
+
+        messagingTemplate.convertAndSend(getChatPath(chat.getId()), message);
     }
 
-    private void sendMessage(String path, User user, Chats chat, String content, MessageType messageType) {
-        ChatMessage message = new ChatMessage(
+    private ChatMessage createChatMessage(User user, Chats chat, String content, MessageType messageType) {
+        return new ChatMessage(
                 UUID.randomUUID().toString(),
                 chat.getId(),
                 user.getId(),
@@ -55,10 +48,10 @@ public class WebSocketService {
                 user.getFirstName(),
                 new Date().toString(),
                 messageType);
-
-        chat.getMessages().add(message);
-        chatsRepository.save(chat);
-
-        messagingTemplate.convertAndSend(path, message);
     }
+
+    private String getChatPath(String chatId) {
+        return path + chatId;
+    }
+
 }

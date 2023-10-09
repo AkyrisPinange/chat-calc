@@ -2,6 +2,7 @@ package com.chat.chatcalc.service.webSocket;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.model.SendMessage;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.DataRetrievalUtil;
@@ -24,6 +25,6 @@ public class SendMessageServiceWs {
         User user = dataRetrievalUtil.getUser(sendMessage.getUserId(), sendMessage.getChatId());
         Chats chat = dataRetrievalUtil.getChat(sendMessage.getChatId());
 
-        webSocketService.sendChatMessage(chat, user, sendMessage.getContent());
+        webSocketService.sendMessage( user, chat, sendMessage.getContent(),  MessageType.SEND);
     }
 }

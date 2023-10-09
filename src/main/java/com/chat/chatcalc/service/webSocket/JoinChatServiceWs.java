@@ -4,6 +4,7 @@ import com.chat.chatcalc.entiteis.ChatReference;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Participants;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
@@ -41,7 +42,7 @@ public class JoinChatServiceWs {
                 user.getChats().add(chatReference);
                 userRepository.save(user);
 
-                webSocketService.joinChatMessage(chat, user,  user.getFirstName() + " entrou!");
+                webSocketService.sendMessage(user, chat,user.getFirstName() + " entrou!",  MessageType.JOIN);
             } else {
                 webSocketService.errorMessageByChatId(chat.getId(), "Usuário já participa do chat");
             }

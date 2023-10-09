@@ -1,45 +1,42 @@
-package com.chat.chatcalc.service.webSocket;
+package com.chat.chatcalc.service;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.CreateRoom;
+import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.reporsitory.UserRepository;
-import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.ChatManipulationUtil;
 import com.chat.chatcalc.utils.Generate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChatServiceWs {
+public class CreateChatService {
     private final UserRepository userRepository;
     private final ChatManipulationUtil chatManipulationUtil;
     private final Generate generate;
-    private final WebSocketService webSocketService;
 
     @Autowired
-    public ChatServiceWs(UserRepository userRepository, ChatManipulationUtil chatManipulationUtil, Generate generate, WebSocketService webSocketService) {
+    public CreateChatService(UserRepository userRepository, ChatManipulationUtil chatManipulationUtil, Generate generate) {
         this.userRepository = userRepository;
         this.chatManipulationUtil = chatManipulationUtil;
         this.generate = generate;
-        this.webSocketService = webSocketService;
     }
 
-    public void createChat(CreateRoom createRoom) {
+    public Chats createChat(CreateRoom createRoom) {
         User user = userRepository.findById(createRoom.getUserId()).orElse(null);
 
         if (user == null) {
-            webSocketService.errorMessageByUser(createRoom.getUserId(), "Impossible to create chat, user not found");
-            return;
+            throw new NotFoundException("Impossible to create chat, user not found");
         }
 
         if (createRoom.getTitle().isEmpty()) {
-            webSocketService.errorMessageByUser(createRoom.getUserId(), "Impossible to create chat, title must not be empty");
-            return;
+            throw new NotFoundException("Impossible to create chat, title must not be empty");
         }
 
-        Chats chat = saveChat(user, createRoom);
-        webSocketService.createChatMessage(chat, user, "Sala criada com sucesso");
+        return saveChat(user, createRoom);
+
     }
 
     private Chats saveChat(User user, CreateRoom createRoom) {
