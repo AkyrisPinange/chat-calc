@@ -3,6 +3,7 @@ package com.chat.chatcalc.filters;
 import com.chat.chatcalc.handler.exceptions.UserUnauthorizedException;
 import com.chat.chatcalc.service.UserService;
 import com.chat.chatcalc.service.auth.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -59,14 +60,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     context.setAuthentication(authToken);
                     SecurityContextHolder.setContext(context);
+
+                    filterChain.doFilter(request, response);
                 } else {
                     // Lançar uma exceção personalizada se a validação do token falhar
                     throw new UserUnauthorizedException("Token invalid ou session expiration");
                 }
             }
         } catch (SignatureException e) {
-            throw new SignatureException("Token invalid ou session expiration");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write(e.getMessage());
+        } catch (ExpiredJwtException e) {
+            // Catch the ExpiredJwtException and throw a custom exception
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token invalid or session expiration");
         }
-        filterChain.doFilter(request, response);
+
     }
 }
