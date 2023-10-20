@@ -31,12 +31,13 @@ public class WebSocketController {
         joinChatServiceWs.joinChat(joinRoom);
     }
 
-    @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
+    @MessageMapping("/chat/{chatId}/costs") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void sendCosts(Costs costs) {
         costsService.addCostToChat(costs);
     }
-    @MessageMapping("/chat/{chatId}/costs") // endpoint Api
+
+    @MessageMapping("/chat/{chatId}/sendMessage ") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void sendMessage(SendMessage sendMessage) {
         sendMessageService.sendMessage(sendMessage);
