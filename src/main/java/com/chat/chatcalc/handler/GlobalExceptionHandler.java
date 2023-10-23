@@ -38,7 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(UserPasswordException.class)
     public ResponseEntity<ErrorDetails> userPasswordException(UserPasswordException ex) {
-        ErrorDetails errorModel = new ErrorDetails(0, ex.getMessage());
+        ErrorDetails errorModel = new ErrorDetails(404 , ex.getMessage());
 
         return new ResponseEntity<>(errorModel, HttpStatus.BAD_REQUEST);
     }

@@ -6,6 +6,7 @@ import com.chat.chatcalc.dto.SignInRequest;
 import com.chat.chatcalc.dto.SignUpRequest;
 import com.chat.chatcalc.enums.Role;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,12 @@ public class AuthenticationService {
 
 
     public JwtAuthenticationResponse signin(SignInRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        } catch (Exception e) {
+           throw new UserPasswordException("Password or e-mail incorrect");
+        }
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         var jwt = jwtService.generateToken(user);
