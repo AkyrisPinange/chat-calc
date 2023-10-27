@@ -7,7 +7,7 @@ $("#connect").on('click', (e) => {
     stompClient = Stomp.over(socket);
 
     stompClient.connect({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNjk2NTE1Mzk3LCJleHAiOjE2OTY2MDE3OTd9.3sufb8NXcTFtIOGmgoUOg-yxkqI8eXSZ1myBBrJMEL',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXNAYWRtaW4uY29tIiwiaWF0IjoxNjk4NDM4NTU3LCJleHAiOjE2OTg1MjQ5NTd9.bmK8cnqZLm5hhc52LwBTSopSpndfFDcZ-7pwuZdFoUk',
     }, function (frame) {
         console.log('Conectado: ' + frame);
     });
@@ -91,6 +91,7 @@ $("#btnSpend").on('click', (e) => {
     let value = $("#value").val();
     let quantity = $("#quantity").val();
     let product = $("#product").val();
+    let totalSpend = $("#totalSpend").val();
 
 
     // Subscribe to the Public Topic
@@ -103,7 +104,8 @@ $("#btnSpend").on('click', (e) => {
             'chatId': chatId,
             'cost': value,
             'quantity': quantity,
-            'product': product
+            'product': product,
+            'totalSpend': totalSpend
         }));
 })
 

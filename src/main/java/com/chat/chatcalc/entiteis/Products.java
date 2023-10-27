@@ -1,9 +1,10 @@
-package com.chat.chatcalc.model;
+package com.chat.chatcalc.entiteis;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
 
@@ -11,12 +12,11 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CostData {
+public class Products {
 
-    private String chatId;
+    @Id
+    private String id;
     private BigDecimal cost;
-    private BigDecimal totalSpend;
     private BigDecimal quantity;
     private String product;
-
 }

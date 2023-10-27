@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,11 +17,10 @@ import java.math.BigDecimal;
 public class Costs {
 
     @Id
-    private String id;
     private String chatId;
-    private BigDecimal cost;
     private BigDecimal total;
-    private BigDecimal quantity;
-    private String product;
+    private BigDecimal totalSpend;
+    private String percents;
+    private List<Products> products = new ArrayList<>();
 
 }
