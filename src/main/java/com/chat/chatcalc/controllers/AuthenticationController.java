@@ -1,6 +1,6 @@
 package com.chat.chatcalc.controllers;
 
-import com.chat.chatcalc.dto.JwtAuthenticationResponse;
+import com.chat.chatcalc.dto.AuthenticationResponse;
 import com.chat.chatcalc.dto.SignInRequest;
 import com.chat.chatcalc.dto.SignUpRequest;
 import com.chat.chatcalc.service.auth.AuthenticationService;
@@ -21,12 +21,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("signup")
-    public JwtAuthenticationResponse signup(@RequestBody SignUpRequest request) {
+    public AuthenticationResponse signup(@RequestBody SignUpRequest request) {
         return authenticationService.signup(request);
     }
 
     @PostMapping("signin")
-    public JwtAuthenticationResponse signin(@RequestBody SignInRequest request) {
+    public AuthenticationResponse signin(@RequestBody SignInRequest request) {
         return authenticationService.signin(request);
     }
 }

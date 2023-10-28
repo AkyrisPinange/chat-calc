@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service.webSocket;
+package com.chat.chatcalc.service.websocket;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;

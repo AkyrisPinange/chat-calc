@@ -4,6 +4,9 @@ import com.chat.chatcalc.reporsitory.ChatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 @Component
@@ -38,5 +41,12 @@ public class Generate {
         } while (!isUnique);
 
         return roomId;
+    }
+
+    public String calculatePercentage(BigDecimal part, BigDecimal whole) {
+        BigDecimal hundred = new BigDecimal("100.0");
+        BigDecimal percentage = part.divide(whole, 4, RoundingMode.HALF_UP).multiply(hundred);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.0");
+        return decimalFormat.format(percentage) + "%";
     }
 }

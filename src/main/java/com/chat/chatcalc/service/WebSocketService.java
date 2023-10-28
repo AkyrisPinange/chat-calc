@@ -45,7 +45,7 @@ public class WebSocketService {
                 chat.getId(),
                 user.getId(),
                 content,
-                user.getFirstName(),
+                user.getName(),
                 new Date().toString(),
                 messageType);
     }

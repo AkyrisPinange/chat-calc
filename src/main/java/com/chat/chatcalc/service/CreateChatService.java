@@ -4,7 +4,6 @@ import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.CreateRoom;
-import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.utils.ChatManipulationUtil;
 import com.chat.chatcalc.utils.Generate;

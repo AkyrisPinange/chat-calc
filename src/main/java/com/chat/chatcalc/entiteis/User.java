@@ -22,8 +22,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     private String id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private String password;
     LocalDateTime createdAt;
@@ -39,12 +38,11 @@ public class User implements UserDetails {
     Role role;
 
 
-    private List<ChatReference> chats = new ArrayList<>();
+    private transient List<ChatReference> chats = new ArrayList<>();
     @Override
     public String getUsername() {
         return email;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

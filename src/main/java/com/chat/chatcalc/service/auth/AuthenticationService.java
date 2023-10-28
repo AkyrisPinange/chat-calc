@@ -1,10 +1,9 @@
 package com.chat.chatcalc.service.auth;
 
 
-import com.chat.chatcalc.dto.JwtAuthenticationResponse;
+import com.chat.chatcalc.dto.AuthenticationResponse;
 import com.chat.chatcalc.dto.SignInRequest;
 import com.chat.chatcalc.dto.SignUpRequest;
-import com.chat.chatcalc.enums.Role;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.reporsitory.UserRepository;
@@ -29,12 +28,16 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationResponse signup(SignUpRequest request) {
+    public AuthenticationResponse signup(SignUpRequest request) {
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Invalid email.");
+        }
+
         var user = User
                 .builder()
                 .id(UUID.randomUUID().toString())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")))
@@ -42,21 +45,24 @@ public class AuthenticationService {
 
         user = userService.save(user);
         var jwt = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(jwt).build();
+        return AuthenticationResponse.builder().token(jwt).build();
     }
 
 
-    public JwtAuthenticationResponse signin(SignInRequest request) {
+    public AuthenticationResponse signin(SignInRequest request) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         } catch (Exception e) {
-           throw new UserPasswordException("Password or e-mail incorrect");
+            throw new UserPasswordException("Password or e-mail incorrect");
         }
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         var jwt = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(jwt).build();
+        return AuthenticationResponse.builder().token(jwt)
+                .name(user.getName())
+                .userId(user.getId())
+                .build();
     }
 
 }

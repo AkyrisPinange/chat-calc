@@ -1,5 +1,6 @@
 package com.chat.chatcalc.entiteis;
 
+import com.chat.chatcalc.enums.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class Costs {
     private BigDecimal totalSpend;
     private String percents;
     private List<Products> products = new ArrayList<>();
+    private MessageType type;
 
 }

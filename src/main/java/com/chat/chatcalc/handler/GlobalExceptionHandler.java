@@ -5,7 +5,6 @@ import com.chat.chatcalc.handler.exceptions.ErrorDetails;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.handler.exceptions.UserUnauthorizedException;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

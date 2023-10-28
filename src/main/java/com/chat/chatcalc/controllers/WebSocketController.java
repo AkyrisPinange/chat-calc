@@ -1,13 +1,14 @@
 package com.chat.chatcalc.controllers;
 
 
-import com.chat.chatcalc.entiteis.Costs;
+import com.chat.chatcalc.model.ChangeSpend;
 import com.chat.chatcalc.model.CostData;
 import com.chat.chatcalc.model.JoinRoom;
 import com.chat.chatcalc.model.SendMessage;
-import com.chat.chatcalc.service.webSocket.CostsService;
-import com.chat.chatcalc.service.webSocket.JoinChatServiceWs;
-import com.chat.chatcalc.service.webSocket.SendMessageServiceWs;
+import com.chat.chatcalc.service.websocket.ChangeSpendService;
+import com.chat.chatcalc.service.websocket.CostsService;
+import com.chat.chatcalc.service.websocket.JoinChatServiceWs;
+import com.chat.chatcalc.service.websocket.SendMessageServiceWs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -22,6 +23,7 @@ public class WebSocketController {
     private final JoinChatServiceWs joinChatServiceWs;
     private final SendMessageServiceWs sendMessageService;
     private final CostsService costsService;
+    private final ChangeSpendService changeSpendService;
 
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
     @SendTo("/topic/chat/{chatId}") // endpoint webSocket
@@ -42,6 +44,12 @@ public class WebSocketController {
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void sendMessage(SendMessage sendMessage) {
         sendMessageService.sendMessage(sendMessage);
+    }
+
+    @MessageMapping("/chat/{chatId}/changeTotalSpend") // endpoint Api
+    @SendTo("/topic/chat/{chatId}")// endpoint webSocket
+    public void changeSpend(ChangeSpend changeSpend) {
+        changeSpendService.changeSpend(changeSpend);
     }
 
 }

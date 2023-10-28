@@ -7,7 +7,7 @@ $("#connect").on('click', (e) => {
     stompClient = Stomp.over(socket);
 
     stompClient.connect({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNjk2NTE1Mzk3LCJleHAiOjE2OTY2MDE3OTd9.3sufb8NXcTFtIOGmgoUOg-yxkqI8eXSZ1myBBrJMEL',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXNAYWRtaW4uY29tIiwiaWF0IjoxNjk4NDUzMTU4LCJleHAiOjE2OTg1Mzk1NTh9.RJcBY_TTm9XrQ4MF6vFqYXTk25TbiW3-zcotFMsQWAE',
     }, function (frame) {
         console.log('Conectado: ' + frame);
     });
@@ -85,12 +85,15 @@ $("#btnChat").on('click', (e) => {
         }));
 })
 
-//sende message
+//spend
 $("#btnSpend").on('click', (e) => {
     let chatId = $("#chatCostId").val();
     let value = $("#value").val();
     let quantity = $("#quantity").val();
     let product = $("#product").val();
+    let totalSpend = $("#totalSpend").val();
+    let idUser = $("#idUser").val();
+
 
 
     // Subscribe to the Public Topic
@@ -103,10 +106,32 @@ $("#btnSpend").on('click', (e) => {
             'chatId': chatId,
             'cost': value,
             'quantity': quantity,
-            'product': product
+            'product': product,
+            'totalSpend': totalSpend,
+            'userId': idUser
         }));
 })
 
+//spend
+$("#btnChangeSpend").on('click', (e) => {
+    let chatId = $("#changeChatId").val();
+    let totalSpend = $("#changeTotalSpend").val();
+    let idUser = $("#changeIdUser").val();
+
+
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chatId, function (message) {
+        console.log('Recebido mensagem: ' + message.body);
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chatId + "/changeTotalSpend",
+        {}, JSON.stringify({
+            'chatId': chatId,
+            'totalSpend': totalSpend,
+            'userId': idUser
+        }));
+})
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';

@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service.webSocket;
+package com.chat.chatcalc.service.websocket;
 
 import com.chat.chatcalc.entiteis.ChatReference;
 import com.chat.chatcalc.entiteis.Chats;
@@ -42,7 +42,7 @@ public class JoinChatServiceWs {
                 user.getChats().add(chatReference);
                 userRepository.save(user);
 
-                webSocketService.sendMessage(user, chat,user.getFirstName() + " entrou!",  MessageType.JOIN);
+                webSocketService.sendMessage(user, chat,user.getName() + " entrou!",  MessageType.JOIN);
             } else {
                 webSocketService.errorMessageByChatId(chat.getId(), "Usuário já participa do chat");
             }

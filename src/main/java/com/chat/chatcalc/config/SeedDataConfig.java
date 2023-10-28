@@ -32,8 +32,7 @@ public class SeedDataConfig implements CommandLineRunner {
         User admin = User
                       .builder()
                       .id(UUID.randomUUID().toString())
-                      .firstName("admin")
-                      .lastName("admin")
+                      .name("admin")
                       .email("admin@admin.com")
                       .password(passwordEncoder.encode("password"))
                       .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")))

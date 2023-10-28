@@ -19,4 +19,6 @@ public class Products {
     private BigDecimal cost;
     private BigDecimal quantity;
     private String product;
+    private String name;
+    private String userId;
 }

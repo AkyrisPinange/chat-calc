@@ -11,14 +11,9 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CostData {
+public class ChangeSpend {
 
     private String chatId;
-    private BigDecimal cost;
-    private BigDecimal totalSpend;
-    private BigDecimal quantity;
-    private String product;
     private String userId;
-
-
+    private BigDecimal totalSpend;
 }
