@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,8 +14,8 @@ import lombok.Setter;
 public class UpdateProduct {
 
     private String productId;
-    private String cost;
-    private String quantity;
+    private BigDecimal cost;
+    private BigDecimal quantity;
     private String product;
 
 }

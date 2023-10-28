@@ -135,7 +135,7 @@ $("#btnChangeSpend").on('click', (e) => {
 
 //spend
 $("#updateProduct").on('click', (e) => {
-
+    let chatId = $("#productChatId").val();
     let productId = $("#productId").val();
     let cost = $("#costUpdate").val();
     let quantity = $("#quantityUpdate").val();

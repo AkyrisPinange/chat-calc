@@ -23,8 +23,7 @@ public class WebSocketController {
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
     @SendTo("/topic/chat/{chatId}") // endpoint webSocket
     public void joinChat(
-            JoinRoom joinRoom,
-            SimpMessageHeaderAccessor headerAccessor
+            JoinRoom joinRoom
     ) {
         joinChatServiceWs.joinChat(joinRoom);
     }
