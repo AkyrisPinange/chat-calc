@@ -24,7 +24,7 @@ public class ChatMessage {
     private String chatId;
     private String userId;
     private String content;
-    private String username;
+    private String name;
     private Long timestamp;
     private MessageType type;
     private List<String> confirmations = new ArrayList<>();
@@ -34,12 +34,12 @@ public class ChatMessage {
         this.type = messageType;
     }
 
-    public ChatMessage(String id, String chatId, String userId, String content, String username, Long timestamp, MessageType type) {
+    public ChatMessage(String id, String chatId, String userId, String content, String name, Long timestamp, MessageType type) {
         this.id = id;
         this.chatId = chatId;
         this.userId = userId;
         this.content = content;
-        this.username = username;
+        this.name = name;
         this.timestamp = timestamp;
         this.type = type;
     }
