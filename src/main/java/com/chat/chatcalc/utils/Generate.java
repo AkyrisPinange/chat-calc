@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
 
 @Component
 public class Generate {
@@ -43,10 +46,19 @@ public class Generate {
         return roomId;
     }
 
-    public String calculatePercentage(BigDecimal part, BigDecimal whole) {
+    public BigDecimal calculatePercentage(BigDecimal part, BigDecimal whole) {
         BigDecimal hundred = new BigDecimal("100.0");
         BigDecimal percentage = part.divide(whole, 4, RoundingMode.HALF_UP).multiply(hundred);
         DecimalFormat decimalFormat = new DecimalFormat("#0.0");
-        return decimalFormat.format(percentage) + "%";
+        return percentage;
+    }
+
+    public String UTCDate(){
+        Date date = new Date();
+
+        // Get a SimpleDateFormat instance for UTC
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdf.format(date);
     }
 }

@@ -73,7 +73,7 @@ public class CostsService {
     private void updateLastCost(Costs lastCost, CostData costData, User user) {
         BigDecimal newTotal = costData.getCost().multiply(costData.getQuantity()).add(lastCost.getTotal());
         lastCost.setTotal(newTotal);
-
+        lastCost.setBalance(costData.getTotalSpend().subtract(newTotal));
         lastCost.setPercents(generate.calculatePercentage(newTotal, costData.getTotalSpend()));
         lastCost.getProducts().add(costDataMapper.mapToProducts(costData, user));
     }

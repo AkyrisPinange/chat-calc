@@ -9,6 +9,7 @@ import com.chat.chatcalc.utils.Generate;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -25,6 +26,7 @@ public class CostDataMapper {
         BigDecimal total = costData.getCost().multiply(costData.getQuantity());
         Costs costs = new Costs();
         costs.setTotalSpend(costData.getTotalSpend());
+        costs.setBalance(costData.getTotalSpend().subtract(total));
         costs.setPercents(generate.calculatePercentage(total, costData.getTotalSpend()));
         costs.setTotal(total);
         costs.setChatId(costData.getChatId());
@@ -41,6 +43,7 @@ public class CostDataMapper {
         product.setProduct(costData.getProduct());
         product.setName(user.getName());
         product.setUserId(user.getId());
+        product.setTimestamp(generate.UTCDate());
         return product;
     }
 

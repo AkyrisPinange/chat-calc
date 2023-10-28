@@ -21,7 +21,8 @@ public class Costs {
     private String chatId;
     private BigDecimal total;
     private BigDecimal totalSpend;
-    private String percents;
+    private BigDecimal percents;
+    private BigDecimal balance;
     private List<Products> products = new ArrayList<>();
     private MessageType type;
 

@@ -31,7 +31,7 @@ public class AuthenticationService {
     public AuthenticationResponse signup(SignUpRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Invalid email.");
+            throw new IllegalArgumentException("Invalid email already in use");
         }
 
         var user = User

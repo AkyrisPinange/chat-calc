@@ -12,6 +12,8 @@ import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.Generate;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class ChangeSpendService {
     private final UserRepository userRepository;
@@ -42,9 +44,9 @@ public class ChangeSpendService {
 
         Costs cost = chat.getCosts().isEmpty() ? null : chat.getCosts().get(chat.getCosts().size() - 1);
 
-        String newPercent = generate.calculatePercentage(cost.getTotal(), changeSpend.getTotalSpend());
+        BigDecimal newPercent = generate.calculatePercentage(cost.getTotal(), changeSpend.getTotalSpend());
         cost.setPercents(newPercent);
-
+        cost.setBalance(changeSpend.getTotalSpend().subtract(cost.getTotal()));
         cost.setTotalSpend(changeSpend.getTotalSpend());
 
         chatsRepository.save(chat);
