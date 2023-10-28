@@ -1,15 +1,13 @@
 package com.chat.chatcalc.service.mappers;
 
+import com.chat.chatcalc.entiteis.Costs;
+import com.chat.chatcalc.entiteis.Products;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.reporsitory.UserRepository;
-import com.chat.chatcalc.service.WebSocketService;
+import com.chat.chatcalc.model.CostData;
 import com.chat.chatcalc.utils.Generate;
 import org.springframework.stereotype.Component;
 
-import com.chat.chatcalc.entiteis.Costs;
-import com.chat.chatcalc.entiteis.Products;
-import com.chat.chatcalc.model.CostData;
 import java.math.BigDecimal;
 import java.util.UUID;
 

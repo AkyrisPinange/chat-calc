@@ -26,22 +26,30 @@ public class ChangeSpendService {
         this.generate = generate;
     }
 
-    public void changeSpend(ChangeSpend changeSpend){
-          User user = userRepository.findById(changeSpend.getUserId()).orElse(null);
-          Chats chat = chatsRepository.findById(changeSpend.getChatId()).orElse(null);
+    public void changeSpend(ChangeSpend changeSpend) {
 
-          Costs cost = chat.getCosts().isEmpty() ? null : chat.getCosts().get(chat.getCosts().size() - 1);
+        Chats chat = chatsRepository.findById(changeSpend.getChatId()).orElse(null);
 
-          String newPercent = generate.calculatePercentage(cost.getTotal(), changeSpend.getTotalSpend());
-          cost.setPercents(newPercent);
+        if (chat == null) {
+            webSocketService.errorMessageByChatId(changeSpend.getChatId(), "Chat not found");
+            return;
+        }
+        User user = userRepository.findById(changeSpend.getUserId()).orElse(null);
+        if (user == null) {
+            webSocketService.errorMessageByChatId(changeSpend.getChatId(), "User not found");
+            return;
+        }
 
-          cost.setTotalSpend(changeSpend.getTotalSpend());
+        Costs cost = chat.getCosts().isEmpty() ? null : chat.getCosts().get(chat.getCosts().size() - 1);
 
-          chatsRepository.save(chat);
+        String newPercent = generate.calculatePercentage(cost.getTotal(), changeSpend.getTotalSpend());
+        cost.setPercents(newPercent);
 
-        webSocketService.sendMessage( user, chat, user.getName() + " alterou o valor à gastar para: " + changeSpend.getTotalSpend(),  MessageType.PRICE);
+        cost.setTotalSpend(changeSpend.getTotalSpend());
 
+        chatsRepository.save(chat);
 
-
-      }
+        String message = user.getName() + " alterou o valor a gastar para: " + changeSpend.getTotalSpend();
+        webSocketService.sendMessage(user, chat, message, MessageType.PRICE);
+    }
 }

@@ -1,6 +1,5 @@
 package com.chat.chatcalc.entiteis;
 
-import com.chat.chatcalc.enums.MessageType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
