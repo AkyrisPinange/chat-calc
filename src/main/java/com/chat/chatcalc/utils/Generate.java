@@ -48,17 +48,12 @@ public class Generate {
 
     public BigDecimal calculatePercentage(BigDecimal part, BigDecimal whole) {
         BigDecimal hundred = new BigDecimal("100.0");
-        BigDecimal percentage = part.divide(whole, 4, RoundingMode.HALF_UP).multiply(hundred);
-        DecimalFormat decimalFormat = new DecimalFormat("#0.0");
-        return percentage;
+
+        return part.divide(whole, 4, RoundingMode.HALF_UP).multiply(hundred);
     }
 
-    public String UTCDate(){
-        Date date = new Date();
+    public Long UTCDate(){
 
-        // Get a SimpleDateFormat instance for UTC
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return sdf.format(date);
+        return System.currentTimeMillis();
     }
 }

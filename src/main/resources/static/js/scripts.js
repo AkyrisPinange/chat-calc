@@ -132,6 +132,28 @@ $("#btnChangeSpend").on('click', (e) => {
             'userId': idUser
         }));
 })
+
+//spend
+$("#updateProduct").on('click', (e) => {
+
+    let productId = $("#productId").val();
+    let cost = $("#costUpdate").val();
+    let quantity = $("#quantityUpdate").val();
+    let product = $("#productUpdate").val();
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chatId, function (message) {
+        console.log('Recebido mensagem: ' + message.body);
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chatId + "/updateProduct",
+        {}, JSON.stringify({
+            'productId': productId,
+            'cost': cost,
+            'quantity': quantity,
+            'product': product,
+        }));
+})
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';

@@ -12,6 +12,8 @@ import lombok.Setter;
 public class UpdateProduct {
 
     private String productId;
-
+    private String cost;
+    private String quantity;
+    private String product;
 
 }

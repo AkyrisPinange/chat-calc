@@ -1,14 +1,8 @@
 package com.chat.chatcalc.controllers;
 
 
-import com.chat.chatcalc.model.ChangeSpend;
-import com.chat.chatcalc.model.CostData;
-import com.chat.chatcalc.model.JoinRoom;
-import com.chat.chatcalc.model.SendMessage;
-import com.chat.chatcalc.service.websocket.ChangeSpendService;
-import com.chat.chatcalc.service.websocket.CostsService;
-import com.chat.chatcalc.service.websocket.JoinChatServiceWs;
-import com.chat.chatcalc.service.websocket.SendMessageServiceWs;
+import com.chat.chatcalc.model.*;
+import com.chat.chatcalc.service.websocket.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -24,6 +18,7 @@ public class WebSocketController {
     private final SendMessageServiceWs sendMessageService;
     private final CostsService costsService;
     private final ChangeSpendService changeSpendService;
+    private final UpdateProductService updateProductService;
 
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
     @SendTo("/topic/chat/{chatId}") // endpoint webSocket
@@ -50,6 +45,12 @@ public class WebSocketController {
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void changeSpend(ChangeSpend changeSpend) {
         changeSpendService.changeSpend(changeSpend);
+    }
+
+    @MessageMapping("/chat/{chatId}/updateProduct") // endpoint Api
+    @SendTo("/topic/chat/{chatId}")// endpoint webSocket
+    public void updateProduc(UpdateProduct updateProduct) {
+        updateProductService.updateProduct(updateProduct);
     }
 
 }

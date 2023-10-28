@@ -21,5 +21,5 @@ public class Products {
     private String product;
     private String name;
     private String userId;
-    private String timestamp;
+    private Long timestamp;
 }
