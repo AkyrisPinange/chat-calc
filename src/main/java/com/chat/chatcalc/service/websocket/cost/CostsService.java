@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service.websocket;
+package com.chat.chatcalc.service.websocket.cost;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Costs;
@@ -57,10 +57,10 @@ public class CostsService {
             return;
         }
 
-        Costs lastCost = chat.getCosts().isEmpty() ? null : chat.getCosts().get(chat.getCosts().size() - 1);
+        Costs lastCost = chat.getCosts();
 
         if (lastCost == null) {
-            chat.getCosts().add(costDataMapper.mapToCosts(costData, user));
+           chat.setCosts(costDataMapper.mapToCosts(costData, user));
         } else {
             updateLastCost(lastCost, costData, user);
         }

@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service.websocket;
+package com.chat.chatcalc.service.websocket.cost;
 
 
 import com.chat.chatcalc.entiteis.Chats;
@@ -42,7 +42,7 @@ public class ChangeSpendService {
             return;
         }
 
-        Costs cost = chat.getCosts().isEmpty() ? null : chat.getCosts().get(chat.getCosts().size() - 1);
+        Costs cost = chat.getCosts();
 
         BigDecimal newPercent = generate.calculatePercentage(cost.getTotal(), changeSpend.getTotalSpend());
         cost.setPercents(newPercent);

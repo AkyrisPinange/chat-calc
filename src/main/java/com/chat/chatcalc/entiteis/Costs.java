@@ -18,7 +18,7 @@ import java.util.List;
 public class Costs {
 
     @Id
-    private String chatId;
+    private String id;
     private BigDecimal total;
     private BigDecimal totalSpend;
     private BigDecimal percents;

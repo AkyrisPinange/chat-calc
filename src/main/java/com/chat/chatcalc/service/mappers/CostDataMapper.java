@@ -28,7 +28,7 @@ public class CostDataMapper {
         costs.setBalance(costData.getTotalSpend().subtract(total));
         costs.setPercents(generate.calculatePercentage(total, costData.getTotalSpend()));
         costs.setTotal(total);
-        costs.setChatId(costData.getChatId());
+        costs.setId(UUID.randomUUID().toString());
         costs.setType(MessageType.PRICE);
         costs.getProducts().add(mapToProducts(costData, user));
         return costs;

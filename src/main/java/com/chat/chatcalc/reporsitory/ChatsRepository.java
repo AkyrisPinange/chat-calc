@@ -1,7 +1,6 @@
 package com.chat.chatcalc.reporsitory;
 
 import com.chat.chatcalc.entiteis.Chats;
-import com.chat.chatcalc.entiteis.Products;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -21,4 +20,7 @@ public interface ChatsRepository extends MongoRepository<Chats,String> {
 
     @Query(value = "{'participants.userId': ?0}", fields = "{'_id': 1, 'roomName': 1, 'roomId': 1}")
     List<Chats> findAllByParticipantsUserId(String userId);
+
+    @Query("{ '_id' : ?0, 'costs.products._id' : ?1 }")
+    Chats deleteProduct(String chatId, String productId);
 }

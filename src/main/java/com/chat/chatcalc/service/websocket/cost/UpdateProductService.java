@@ -1,4 +1,4 @@
-package com.chat.chatcalc.service.websocket;
+package com.chat.chatcalc.service.websocket.cost;
 
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Costs;
@@ -33,8 +33,8 @@ public class UpdateProductService {
 
         Chats chats = chatsRepository.findChatsByProductId(product.getProductId());
 
-        if (chats != null && !chats.getCosts().isEmpty()) {
-            Costs costs = chats.getCosts().get(0);
+        if (chats != null ) {
+            Costs costs = chats.getCosts();
             List<Products> productsList = costs.getProducts();
 
             BigDecimal productCost = product.getCost();

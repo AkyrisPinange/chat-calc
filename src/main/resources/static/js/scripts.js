@@ -7,7 +7,7 @@ $("#connect").on('click', (e) => {
     stompClient = Stomp.over(socket);
 
     stompClient.connect({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXNAYWRtaW4uY29tIiwiaWF0IjoxNjk4NDUzMTU4LCJleHAiOjE2OTg1Mzk1NTh9.RJcBY_TTm9XrQ4MF6vFqYXTk25TbiW3-zcotFMsQWAE',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXNAYWRtaW4uY29tIiwiaWF0IjoxNjk4ODM4MTc4LCJleHAiOjE3MDg4NjIyMzh9.F9YpzAtTuw4sq8tum9_gzikjnJq3bAu0uIfoeNeZCiU',
     }, function (frame) {
         console.log('Conectado: ' + frame);
     });
@@ -20,7 +20,7 @@ $("#btnChatId").on('click', (e) => {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + userId, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log( JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/createChat",
@@ -56,7 +56,7 @@ function joinChat(chat) {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + chat.data.id, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log( JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/" + chat.data.id + "/joinChat",
@@ -74,7 +74,7 @@ $("#btnChat").on('click', (e) => {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + chatId, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log( JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/sendMessage",
@@ -98,7 +98,7 @@ $("#btnSpend").on('click', (e) => {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + chatId, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log(JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/costs",
@@ -112,7 +112,7 @@ $("#btnSpend").on('click', (e) => {
         }));
 })
 
-//spend
+//change
 $("#btnChangeSpend").on('click', (e) => {
     let chatId = $("#changeChatId").val();
     let totalSpend = $("#changeTotalSpend").val();
@@ -122,7 +122,7 @@ $("#btnChangeSpend").on('click', (e) => {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + chatId, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log( JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/changeTotalSpend",
@@ -143,7 +143,7 @@ $("#updateProduct").on('click', (e) => {
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/chat/' + chatId, function (message) {
-        console.log('Recebido mensagem: ' + message.body);
+        console.log(JSON.parse( message.body));
     });
     // Tell your username to the server
     stompClient.send("/app/chat/" + chatId + "/updateProduct",
@@ -154,6 +154,25 @@ $("#updateProduct").on('click', (e) => {
             'product': product,
         }));
 })
+
+//delete
+$("#productDeleteIdbtn").on('click', (e) => {
+
+    let product = $("#productDeleteId").val();
+    let chatId = $("#chatDeleteId").val();
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chatId, function (message) {
+        console.log(JSON.parse( message.body));
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chatId + "/deleteProduct" ,
+        {}, JSON.stringify({
+                    'productId': product,
+                    'chatId': chatId,
+                }));
+})
+
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';
