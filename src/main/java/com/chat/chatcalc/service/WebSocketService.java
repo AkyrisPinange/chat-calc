@@ -48,7 +48,7 @@ public class WebSocketService {
                 user.getId(),
                 content,
                 user.getName(),
-                generate.UTCDate(),
+                generate.utcDate(),
                 messageType);
     }
 

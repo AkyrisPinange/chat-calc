@@ -1,0 +1,49 @@
+# flyctl launch added from .gitignore
+# Maven specific
+target
+**\pom.xml.backup
+**\release.properties
+**\pom.xml.releaseBackup
+**\pom.xml.tag
+**\pom.xml.next
+**\pom.xml.releaseBackup
+**\pom.xml.versionsBackup
+**\pom.xml.versionsBackup
+**\pom.xml.versionsBackup
+**\pom.xml.versionsBackup
+**\*.jar
+**\*.war
+**\*.ear
+**\*.zip
+**\*.tar.gz
+**\*.rar
+
+# Ignore application.properties file
+**\src\main\resources\application.properties
+
+# Eclipse specific
+**\.classpath
+**\.project
+**\.settings
+
+# IntelliJ IDEA specific
+**\.idea
+**\*.iml
+
+# NetBeans specific
+**\nbproject
+**\build
+**\nbbuild
+**\dist
+**\nbdist
+**\nbactions.xml
+**\.nb-gradle
+
+# Visual Studio Code specific
+**\.vscode
+
+# flyctl launch added from .idea\.gitignore
+# Default ignored files
+.idea\shelf
+.idea\workspace.xml
+fly.toml

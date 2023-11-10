@@ -42,7 +42,7 @@ public class CostDataMapper {
         product.setProduct(costData.getProduct());
         product.setName(user.getName());
         product.setUserId(user.getId());
-        product.setTimestamp(generate.UTCDate());
+        product.setTimestamp(generate.utcDate());
         return product;
     }
 

@@ -23,9 +23,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorDetails> userNotFoundException(NotFoundException ex) {
-        ErrorDetails errorModel = new ErrorDetails(404 , ex.getMessage());
+    public ResponseEntity<ErrorDetails> notFoundException(NotFoundException ex) {
+        ErrorDetails errorModel = new ErrorDetails(400 , ex.getMessage());
 
         return new ResponseEntity<>(errorModel, HttpStatus.NOT_FOUND);
     }
@@ -46,7 +47,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> globalExceptionHandler(Exception ex) {
         ErrorDetails errorModel = new ErrorDetails(500, ex.getMessage());
         return new ResponseEntity<>(errorModel, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
     @ExceptionHandler(UserUnauthorizedException.class)
     public ResponseEntity<ErrorDetails> userUnauthorizedException(UserUnauthorizedException ex) {

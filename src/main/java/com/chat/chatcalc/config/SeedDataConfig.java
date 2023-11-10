@@ -1,7 +1,6 @@
 package com.chat.chatcalc.config;
 
 
-import com.chat.chatcalc.enums.Role;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.UserService;
@@ -29,12 +28,12 @@ public class SeedDataConfig implements CommandLineRunner {
         
       if (userRepository.count() == 2) {
 
-        User admin = User
+          User admin = User
                       .builder()
                       .id(UUID.randomUUID().toString())
                       .name("admin")
                       .email("admin@admin.com")
-                      .password(passwordEncoder.encode("password"))
+                      .password(passwordEncoder.encode("admin123"))
                       .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")))
                       .build();
 

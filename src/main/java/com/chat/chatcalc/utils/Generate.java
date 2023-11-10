@@ -6,11 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
-import java.util.TimeZone;
 
 @Component
 public class Generate {
@@ -52,7 +48,7 @@ public class Generate {
         return part.divide(whole, 4, RoundingMode.HALF_UP).multiply(hundred);
     }
 
-    public Long UTCDate(){
+    public Long utcDate(){
 
         return System.currentTimeMillis();
     }

@@ -8,6 +8,7 @@ import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.UserService;
+import com.chat.chatcalc.utils.Validate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,12 +28,15 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final Validate validate;
 
     public AuthenticationResponse signup(SignUpRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Invalid email already in use");
         }
+        
+        validate.validateEmail(request.getEmail());
 
         var user = User
                 .builder()
