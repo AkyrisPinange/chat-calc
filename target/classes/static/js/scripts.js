@@ -101,7 +101,7 @@ $("#btnSpend").on('click', (e) => {
         console.log(JSON.parse( message.body));
     });
     // Tell your username to the server
-    stompClient.send("/app/chat/" + chatId + "/costs",
+    stompClient.send("/app/chat/" + chatId + "/addCost",
         {}, JSON.stringify({
             'chatId': chatId,
             'cost': value,

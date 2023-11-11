@@ -5,10 +5,6 @@ import com.chat.chatcalc.service.UserService;
 import com.chat.chatcalc.service.auth.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -37,44 +38,46 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
-        final String jwt;
-        final String userEmail;
-
-        if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
         try {
-            jwt = authHeader.substring(7);
-            log.debug("JWT - {}", jwt);
-            userEmail = jwtService.extractUserName(jwt);
+            String authHeader = request.getHeader("Authorization");
 
-            if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
-                if (jwtService.isTokenValid(jwt, userDetails)) {
-                    log.debug("User - {}", userDetails);
-                    SecurityContext context = SecurityContextHolder.createEmptyContext();
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    context.setAuthentication(authToken);
-                    SecurityContextHolder.setContext(context);
+            if (StringUtils.isNotEmpty(authHeader) && StringUtils.startsWith(authHeader, "Bearer ")) {
+                String jwt = authHeader.substring(7);
+                log.debug("JWT - {}", jwt);
 
-                    filterChain.doFilter(request, response);
-                } else {
-                    // Lançar uma exceção personalizada se a validação do token falhar
-                    throw new UserUnauthorizedException("Token invalid ou session expiration");
+                String userEmail = jwtService.extractUserName(jwt);
+
+                if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
+
+                    if (jwtService.isTokenValid(jwt, userDetails)) {
+                        log.debug("User - {}", userDetails);
+
+                        SecurityContext context = SecurityContextHolder.createEmptyContext();
+                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
+                        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        context.setAuthentication(authToken);
+                        SecurityContextHolder.setContext(context);
+
+                        filterChain.doFilter(request, response);
+                        return;
+                    } else {
+                        throw new UserUnauthorizedException("Token invalid or session expiration");
+                    }
                 }
             }
         } catch (SignatureException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write(e.getMessage());
+            handleException(response, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
         } catch (ExpiredJwtException e) {
-            // Catch the ExpiredJwtException and throw a custom exception
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Token invalid or session expiration");
+            handleException(response, HttpServletResponse.SC_UNAUTHORIZED, "Token invalid or session expiration");
         }
 
+        filterChain.doFilter(request, response);
+    }
+
+    private void handleException(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.getWriter().write(message);
     }
 }
