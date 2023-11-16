@@ -7,7 +7,7 @@ $("#connect").on('click', (e) => {
     stompClient = Stomp.over(socket);
 
     stompClient.connect({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXNAYWRtaW4uY29tIiwiaWF0IjoxNjk4ODM4MTc4LCJleHAiOjE3MDg4NjIyMzh9.F9YpzAtTuw4sq8tum9_gzikjnJq3bAu0uIfoeNeZCiU',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha3lyaXMiLCJpYXQiOjE2OTk5MjA4MzUsImV4cCI6MTcwOTk0NDg5NX0.algCWN1MYXOmj-DuSLgUF7AN_sTXGgybVUaGg79hIZc',
     }, function (frame) {
         console.log('Conectado: ' + frame);
     });

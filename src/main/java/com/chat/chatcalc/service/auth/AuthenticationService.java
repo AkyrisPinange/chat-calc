@@ -5,6 +5,7 @@ import com.chat.chatcalc.dto.AuthenticationResponse;
 import com.chat.chatcalc.dto.SignInRequest;
 import com.chat.chatcalc.dto.SignUpRequest;
 import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.UserService;
@@ -33,7 +34,7 @@ public class AuthenticationService {
     public AuthenticationResponse signup(SignUpRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Invalid email already in use");
+            throw new NotFoundException("Invalid email already in use");
         }
         
         validate.validateEmail(request.getEmail());
