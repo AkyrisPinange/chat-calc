@@ -31,10 +31,11 @@ public class Chats {
         this.id = id;
         this.roomName = roomName;
     }
-    public Chats(String id, String roomName, String roomId, List<Participants> participants){
+    public Chats(String id, String roomName, String roomId, List<Participants> participants, Costs costs){
         this.id = id;
         this.roomName = roomName;
         this.roomId = roomId;
         this.participants = participants;
+        this.costs = costs;
     }
 }

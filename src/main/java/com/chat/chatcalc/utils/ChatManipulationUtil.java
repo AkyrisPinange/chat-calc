@@ -1,14 +1,14 @@
 package com.chat.chatcalc.utils;
 
-import com.chat.chatcalc.entiteis.ChatReference;
-import com.chat.chatcalc.entiteis.Chats;
-import com.chat.chatcalc.entiteis.Participants;
-import com.chat.chatcalc.entiteis.User;
+import com.chat.chatcalc.entiteis.*;
+import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -33,8 +33,11 @@ public class ChatManipulationUtil {
                                String role // creator role
     ) {
         Participants newParticipant = new Participants(userId, role);
+        Costs costs = new Costs(UUID.randomUUID().toString(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>(), MessageType.PRICE );
         Chats newChat = new Chats(UUID.randomUUID().toString(), // random id
-                roomName, roomId, Collections.singletonList(newParticipant));
+                roomName, roomId, Collections.singletonList(newParticipant), costs);
+
+
 
         return chatsRepository.save(newChat);
     }
