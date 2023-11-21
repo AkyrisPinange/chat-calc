@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class ChatManipulationUtil {
 
     public Participants newParticipant(String userId, String role) {
 
-        return new Participants(userId, role);
+        return new Participants(userId, role, LocalDateTime.now());
     }
 
     // save
@@ -32,7 +33,7 @@ public class ChatManipulationUtil {
                                String userId, // id chat
                                String role // creator role
     ) {
-        Participants newParticipant = new Participants(userId, role);
+        Participants newParticipant = new Participants(userId, role , LocalDateTime.now());
         Costs costs = new Costs(UUID.randomUUID().toString(), BigDecimal.ZERO, new BigDecimal(100),BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>(), MessageType.PRICE );
         Chats newChat = new Chats(UUID.randomUUID().toString(), // random id
                 roomName, roomId, Collections.singletonList(newParticipant), costs);

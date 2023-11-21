@@ -3,7 +3,7 @@ package com.chat.chatcalc.service.websocket.cost;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Costs;
 import com.chat.chatcalc.entiteis.User;
-import com.chat.chatcalc.model.CostData;
+import com.chat.chatcalc.model.product.CostData;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;

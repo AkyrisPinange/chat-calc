@@ -4,7 +4,7 @@ import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Costs;
 import com.chat.chatcalc.entiteis.Products;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
-import com.chat.chatcalc.model.DeleteCost;
+import com.chat.chatcalc.model.product.DeleteCost;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.utils.Generate;
 import org.springframework.beans.factory.annotation.Value;

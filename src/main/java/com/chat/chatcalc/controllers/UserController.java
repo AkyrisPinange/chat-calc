@@ -1,8 +1,8 @@
 package com.chat.chatcalc.controllers;
 
-import com.chat.chatcalc.model.AlterPassword;
+import com.chat.chatcalc.model.user.AlterPassword;
 import com.chat.chatcalc.model.SuccessResponse;
-import com.chat.chatcalc.model.UpdateUserName;
+import com.chat.chatcalc.model.user.UpdateUserName;
 import com.chat.chatcalc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

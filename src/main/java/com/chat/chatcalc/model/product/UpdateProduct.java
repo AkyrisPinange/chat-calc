@@ -1,4 +1,4 @@
-package com.chat.chatcalc.model;
+package com.chat.chatcalc.model.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CostData {
+public class UpdateProduct {
 
-    private String chatId;
+    private String productId;
     private BigDecimal cost;
-    private BigDecimal totalSpend;
     private BigDecimal quantity;
     private String product;
-    private String userId;
-
 
 }

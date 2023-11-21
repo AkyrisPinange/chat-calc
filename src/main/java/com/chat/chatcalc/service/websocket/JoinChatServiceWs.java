@@ -6,12 +6,14 @@ import com.chat.chatcalc.entiteis.Participants;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
-import com.chat.chatcalc.model.JoinRoom;
+import com.chat.chatcalc.model.room.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -34,7 +36,7 @@ public class JoinChatServiceWs {
 
         if (chat != null && user != null) {
             if (!isUserParticipant(chat, user)) {
-                Participants newParticipant = new Participants(joinRoom.getUserId(), "participant");
+                Participants newParticipant = new Participants(joinRoom.getUserId(), "participant", LocalDateTime.now());
                 chat.getParticipants().add(newParticipant);
                 chatsRepository.save(chat);
 

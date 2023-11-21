@@ -2,8 +2,9 @@ package com.chat.chatcalc.controllers;
 
 
 import com.chat.chatcalc.entiteis.Chats;
-import com.chat.chatcalc.model.CreateRoom;
+import com.chat.chatcalc.model.room.CreateRoom;
 import com.chat.chatcalc.model.SuccessResponse;
+import com.chat.chatcalc.model.room.DeleteChat;
 import com.chat.chatcalc.service.ChatService;
 import com.chat.chatcalc.service.CreateChatService;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,13 @@ public class ChatController {
             @RequestParam(value = "chatId") final String chatId
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Conteúdo do chat Carregado!",  chatService.getChatById(chatId)));
+    }
+
+    @DeleteMapping("deleteChat") // endpoint Api
+    @ResponseBody
+    public ResponseEntity<SuccessResponse<String>> deleteChat(
+            @RequestBody final DeleteChat deleteChat
+    ) {
+        return ResponseEntity.ok(new SuccessResponse<>("200", "Sucesso!",  chatService.deleteChat(deleteChat)));
     }
 }

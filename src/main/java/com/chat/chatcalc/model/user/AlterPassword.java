@@ -1,4 +1,4 @@
-package com.chat.chatcalc.model;
+package com.chat.chatcalc.model.user;
 
 
 import lombok.AllArgsConstructor;

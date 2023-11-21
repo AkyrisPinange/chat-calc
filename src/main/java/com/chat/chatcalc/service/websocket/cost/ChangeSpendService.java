@@ -5,7 +5,7 @@ import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.Costs;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.model.ChangeSpend;
+import com.chat.chatcalc.model.product.ChangeSpend;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;

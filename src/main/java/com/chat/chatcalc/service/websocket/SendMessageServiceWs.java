@@ -3,7 +3,7 @@ package com.chat.chatcalc.service.websocket;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
-import com.chat.chatcalc.model.SendMessage;
+import com.chat.chatcalc.model.room.SendMessage;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.DataRetrievalUtil;
 import org.springframework.beans.factory.annotation.Autowired;

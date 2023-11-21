@@ -1,5 +1,4 @@
-package com.chat.chatcalc.model;
-
+package com.chat.chatcalc.model.room;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeleteCost {
+public class JoinRoom {
 
-    String chatId;
-    String productId;
-
+    private String chatId;
+    private String userId;
 }

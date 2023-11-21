@@ -2,8 +2,8 @@ package com.chat.chatcalc.service;
 
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
-import com.chat.chatcalc.model.AlterPassword;
-import com.chat.chatcalc.model.UpdateUserName;
+import com.chat.chatcalc.model.user.AlterPassword;
+import com.chat.chatcalc.model.user.UpdateUserName;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
