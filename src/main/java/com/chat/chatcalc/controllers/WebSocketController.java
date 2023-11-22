@@ -17,6 +17,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+import javax.validation.Valid;
+
 @Controller
 @RequiredArgsConstructor
 public class WebSocketController {
@@ -32,14 +34,14 @@ public class WebSocketController {
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
     @SendTo("/topic/chat/{chatId}") // endpoint webSocket
     public void joinChat(
-            JoinRoom joinRoom
+            @Valid JoinRoom joinRoom
     ) {
         joinChatServiceWs.joinChat(joinRoom);
     }
 
     @MessageMapping("/chat/{chatId}/sendMessage") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public void sendMessage(SendMessage sendMessage) {
+    public void sendMessage(@Valid SendMessage sendMessage) {
         sendMessageService.sendMessage(sendMessage);
     }
 
@@ -57,14 +59,14 @@ public class WebSocketController {
 
     @MessageMapping("/chat/{chatId}/updateProduct") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
-    public void updateProduct(UpdateProduct updateProduct) {
+    public void updateProduct(@Valid UpdateProduct updateProduct) {
         updateProductService.updateProduct(updateProduct);
     }
 
     @MessageMapping("/chat/{chatId}/deleteProduct") // endpoint Api
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void deleteProduct(
-            DeleteCost deleteCost
+            @Valid DeleteCost deleteCost
     ) {
         deleteCostService.deleteProduct(deleteCost);
     }

@@ -2,6 +2,7 @@ package com.chat.chatcalc.model.product;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
@@ -9,13 +10,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 
 public class UpdateProduct {
-    @NonNull()
+    @NotNull()
     private String productId;
-    @NonNull()
+    @NotNull()
     private BigDecimal cost;
-    @NonNull()
+    @NotNull()
     private BigDecimal quantity;
-    @NonNull()
+    @NotNull()
     private String product;
 
 }

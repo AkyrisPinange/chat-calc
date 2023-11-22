@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class ChatController {
 
     @PostMapping("createChat") // endpoint Api
     public  ResponseEntity<SuccessResponse<Chats>> createRoom(
-            @RequestBody CreateRoom createRoom
+            @Valid @RequestBody CreateRoom createRoom
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("201", "Chat criado com sucesso", createRoomServiceWs.createChat(createRoom)));
 
@@ -59,7 +60,7 @@ public class ChatController {
     @DeleteMapping("deleteChat") // endpoint Api
     @ResponseBody
     public ResponseEntity<SuccessResponse<String>> deleteChat(
-            @RequestBody final DeleteChat deleteChat
+            @Valid @RequestBody final DeleteChat deleteChat
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Sucesso!",  chatService.deleteChat(deleteChat)));
     }

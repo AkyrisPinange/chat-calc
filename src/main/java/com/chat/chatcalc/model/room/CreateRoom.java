@@ -2,15 +2,17 @@ package com.chat.chatcalc.model.room;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 
 public class CreateRoom {
-    @NonNull()
+    @NotNull()
     private String title;
-    @NonNull()
+    @NotNull()
     private String userId;
 
 }

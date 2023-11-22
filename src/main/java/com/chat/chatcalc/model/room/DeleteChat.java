@@ -3,12 +3,14 @@ package com.chat.chatcalc.model.room;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @AllArgsConstructor
 public class DeleteChat {
-    @NonNull()
+    @NotNull()
     private String chatId;
-    @NonNull()
+    @NotNull()
     private String userId;
 }

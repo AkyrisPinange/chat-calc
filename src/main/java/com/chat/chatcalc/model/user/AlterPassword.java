@@ -1,6 +1,7 @@
 package com.chat.chatcalc.model.user;
 
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -8,10 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlterPassword {
-   @NonNull()
+   @NotNull()
    private String userId;
-   @NonNull()
+   @NotNull()
    private String currentPassword;
-   @NonNull()
+   @NotNull()
    private String newPassword;
 }

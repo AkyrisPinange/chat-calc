@@ -2,23 +2,24 @@ package com.chat.chatcalc.model.product;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class CostData {
-    @NonNull()
+    @NotNull()
     private String chatId;
-    @NonNull()
+    @NotNull()
     private BigDecimal cost;
-    @NonNull()
+    @NotNull()
     private BigDecimal totalSpend;
-    @NonNull()
+    @NotNull()
     private BigDecimal quantity;
-    @NonNull()
+    @NotNull()
     private String product;
-    @NonNull()
+    @NotNull()
     private String userId;
 
 

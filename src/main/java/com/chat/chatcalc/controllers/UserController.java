@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
     @PostMapping("updatePassword") // endpoint Api
     public ResponseEntity<SuccessResponse<String>> updatePassword(
-            @RequestBody AlterPassword alterPassword
+            @Valid @RequestBody AlterPassword alterPassword
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.alterPassword(alterPassword)));
 
