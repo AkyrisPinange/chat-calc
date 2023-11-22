@@ -1,17 +1,16 @@
 package com.chat.chatcalc.model.room;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class CreateRoom {
+    @NonNull()
     private String title;
+    @NonNull()
     private String userId;
 
 }

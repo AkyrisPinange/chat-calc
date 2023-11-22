@@ -40,7 +40,7 @@ $("#btnJoin").on('click', (e) => {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/chat/getChatByRoomId?roomId=" + roomId, requestOptions)
+    fetch("https://calc-price-93edc467dcb1.herokuapp.com/chat/getChatByRoomId?roomId=" + roomId, requestOptions)
         .then(response => response.text())
         .then(result => {
             chat = result;

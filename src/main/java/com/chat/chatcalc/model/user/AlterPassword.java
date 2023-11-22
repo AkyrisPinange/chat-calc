@@ -1,18 +1,17 @@
 package com.chat.chatcalc.model.user;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlterPassword {
-
+   @NonNull()
    private String userId;
+   @NonNull()
    private String currentPassword;
+   @NonNull()
    private String newPassword;
 }

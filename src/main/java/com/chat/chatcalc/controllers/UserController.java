@@ -4,6 +4,7 @@ import com.chat.chatcalc.model.user.AlterPassword;
 import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.model.user.UpdateUserName;
 import com.chat.chatcalc.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class UserController {
 
     @PostMapping("updateUsername") // endpoint Api
     public ResponseEntity<SuccessResponse<String>> updatePassword(
-            @RequestBody UpdateUserName updateUser
+            @Valid @RequestBody UpdateUserName updateUser
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.updateUserName(updateUser)));
 

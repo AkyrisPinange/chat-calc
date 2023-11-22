@@ -1,4 +1,4 @@
-package com.chat.chatcalc.model.user;
+package com.chat.chatcalc.entiteis;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
