@@ -36,12 +36,12 @@ public class AuthenticationService {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new NotFoundException("Invalid email already in use");
         }
-        
+
         validate.validateEmail(request.getEmail());
 
         var user = User
                 .builder()
-                .id(UUID.randomUUID().toString())
+                .id(validGoogleId(request))
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -73,4 +73,12 @@ public class AuthenticationService {
                 .build();
     }
 
+    private String validGoogleId(SignUpRequest request) {
+
+        if (request.getGoogleId() == null || request.getGoogleId().isBlank()) {
+            return UUID.randomUUID().toString();
+        }
+
+        return request.getGoogleId();
+    }
 }
