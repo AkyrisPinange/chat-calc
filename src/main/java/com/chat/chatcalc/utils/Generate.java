@@ -1,7 +1,6 @@
 package com.chat.chatcalc.utils;
 
 import com.chat.chatcalc.reporsitory.ChatsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -10,7 +9,6 @@ import java.util.Random;
 
 @Component
 public class Generate {
-    @Autowired
     private ChatsRepository chatsRepository;
     private final Random random = new Random();
     public String generateRandomID(int length) {

@@ -3,16 +3,13 @@ package com.chat.chatcalc.service.auth;
 
 import com.chat.chatcalc.dto.AuthenticationResponse;
 import com.chat.chatcalc.dto.SignInRequest;
-import com.chat.chatcalc.dto.SignUpRequest;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
-import com.chat.chatcalc.handler.exceptions.UserPasswordException;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.UserService;
 import com.chat.chatcalc.utils.Validate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,17 +28,16 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final Validate validate;
 
-    public AuthenticationResponse signup(SignUpRequest request) {
+    public AuthenticationResponse signup(SignInRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new NotFoundException("Invalid email already in use");
         }
-
         validate.validateEmail(request.getEmail());
 
         var user = User
                 .builder()
-                .id(validGoogleId(request))
+                .id(UUID.randomUUID().toString())
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -49,36 +45,25 @@ public class AuthenticationService {
                 .build();
 
         user = userService.save(user);
-        var jwt = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwt)
-                .name(user.getName())
-                .userId(user.getId())
-                .build();
+        return returnAuthentication(user);
     }
-
 
     public AuthenticationResponse signin(SignInRequest request) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        } catch (Exception e) {
-            throw new UserPasswordException("Password or e-mail incorrect");
+
+        var user = userRepository.findByEmail(request.getEmail()).orElse(null);
+
+        if (user != null) {
+           return returnAuthentication(user);
+        } else {
+            return signup(request);
         }
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
+    }
+
+    AuthenticationResponse returnAuthentication(User user) {
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt)
                 .name(user.getName())
                 .userId(user.getId())
                 .build();
-    }
-
-    private String validGoogleId(SignUpRequest request) {
-
-        if (request.getGoogleId() == null || request.getGoogleId().isBlank()) {
-            return UUID.randomUUID().toString();
-        }
-
-        return request.getGoogleId();
     }
 }

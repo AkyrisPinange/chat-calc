@@ -4,7 +4,6 @@ import com.chat.chatcalc.entiteis.*;
 import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -15,10 +14,9 @@ import java.util.UUID;
 
 @Component
 public class ChatManipulationUtil {
-    @Autowired
+
     private ChatsRepository chatsRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
 
