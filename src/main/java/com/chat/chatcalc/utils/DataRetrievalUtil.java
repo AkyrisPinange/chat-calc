@@ -9,9 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataRetrievalUtil {
-    private UserRepository userRepository;
-    private ChatsRepository chatsRepository;
-    private WebSocketService webSocketService;
+    private final UserRepository userRepository;
+    private final ChatsRepository chatsRepository;
+    private final WebSocketService webSocketService;
+
+    public DataRetrievalUtil(UserRepository userRepository, ChatsRepository chatsRepository, WebSocketService webSocketService) {
+        this.userRepository = userRepository;
+        this.chatsRepository = chatsRepository;
+        this.webSocketService = webSocketService;
+    }
 
     public Chats getChat(String chatId) {
         return chatsRepository.findById(chatId)
