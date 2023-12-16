@@ -1,6 +1,7 @@
 package com.chat.chatcalc.utils;
 
 import com.chat.chatcalc.reporsitory.ChatsRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -8,9 +9,12 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 @Component
+@AllArgsConstructor
 public class Generate {
-    private ChatsRepository chatsRepository;
+
+    private final ChatsRepository chatsRepository;
     private final Random random = new Random();
+
     public String generateRandomID(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder randomID = new StringBuilder();

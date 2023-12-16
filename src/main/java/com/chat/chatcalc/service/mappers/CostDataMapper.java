@@ -6,19 +6,18 @@ import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.model.product.CostData;
 import com.chat.chatcalc.utils.Generate;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Component
+@AllArgsConstructor
 public class CostDataMapper {
 
     private final Generate generate;
 
-    public CostDataMapper(Generate generate) {
-        this.generate = generate;
-    }
 
     public Costs mapToCosts(CostData costData, User user) {
 

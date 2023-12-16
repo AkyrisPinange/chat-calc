@@ -57,11 +57,5 @@ public class ChatController {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Conteúdo do chat Carregado!",  chatService.getChatById(chatId)));
     }
 
-    @DeleteMapping("deleteChat") // endpoint Api
-    @ResponseBody
-    public ResponseEntity<SuccessResponse<String>> deleteChat(
-            @Valid @RequestBody final DeleteChat deleteChat
-    ) {
-        return ResponseEntity.ok(new SuccessResponse<>("200", "Sucesso!",  chatService.deleteChat(deleteChat)));
-    }
+
 }

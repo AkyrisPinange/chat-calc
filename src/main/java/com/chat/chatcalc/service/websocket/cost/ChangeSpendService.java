@@ -10,23 +10,19 @@ import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Service
+@RequiredArgsConstructor
 public class ChangeSpendService {
+
     private final UserRepository userRepository;
     private final ChatsRepository chatsRepository;
     private final WebSocketService webSocketService;
     private final Generate generate;
-
-    public ChangeSpendService(UserRepository userRepository, ChatsRepository chatsRepository, WebSocketService webSocketService, Generate generate) {
-        this.userRepository = userRepository;
-        this.chatsRepository = chatsRepository;
-        this.webSocketService = webSocketService;
-        this.generate = generate;
-    }
 
     public void changeSpend(ChangeSpend changeSpend) {
 

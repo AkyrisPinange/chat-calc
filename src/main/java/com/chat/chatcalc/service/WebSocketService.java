@@ -7,6 +7,7 @@ import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.entiteis.ChatMessage;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class WebSocketService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatsRepository chatsRepository;
@@ -22,11 +24,6 @@ public class WebSocketService {
     @Value("${websocket.uri.prefix}")
     private String path;
 
-    public WebSocketService(SimpMessagingTemplate messagingTemplate, ChatsRepository chatsRepository, Generate generate) {
-        this.messagingTemplate = messagingTemplate;
-        this.chatsRepository = chatsRepository;
-        this.generate = generate;
-    }
 
 
     public void errorMessageByChatId(String chatId, String message) {

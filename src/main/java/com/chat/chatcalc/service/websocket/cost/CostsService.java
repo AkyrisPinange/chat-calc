@@ -9,6 +9,7 @@ import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.service.mappers.CostDataMapper;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
+@RequiredArgsConstructor
 public class CostsService {
     private final ChatsRepository chatsRepository;
     private final WebSocketService webSocketService;
@@ -27,21 +29,7 @@ public class CostsService {
     @Value("${websocket.uri.prefix}")
     private String path;
 
-    public CostsService(
-            ChatsRepository chatsRepository,
-            WebSocketService webSocketService,
-            SimpMessagingTemplate messagingTemplate,
-            CostDataMapper costDataMapper,
-            Generate generate,
-            UserRepository userRepository
-    ) {
-        this.chatsRepository = chatsRepository;
-        this.webSocketService = webSocketService;
-        this.messagingTemplate = messagingTemplate;
-        this.costDataMapper = costDataMapper;
-        this.generate = generate;
-        this.userRepository = userRepository;
-    }
+
 
     public void addCostToChat(CostData costData) {
         Chats chat = chatsRepository.findById(costData.getChatId()).orElse(null);

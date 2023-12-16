@@ -1,10 +1,12 @@
 package com.chat.chatcalc.controllers;
 
 
+import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.model.product.ChangeSpend;
 import com.chat.chatcalc.model.product.CostData;
 import com.chat.chatcalc.model.product.DeleteCost;
 import com.chat.chatcalc.model.product.UpdateProduct;
+import com.chat.chatcalc.model.room.DeleteChat;
 import com.chat.chatcalc.model.room.JoinRoom;
 import com.chat.chatcalc.model.room.SendMessage;
 import com.chat.chatcalc.service.websocket.*;
@@ -13,9 +15,13 @@ import com.chat.chatcalc.service.websocket.cost.CostsService;
 import com.chat.chatcalc.service.websocket.cost.DeleteCostService;
 import com.chat.chatcalc.service.websocket.cost.UpdateProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -30,6 +36,7 @@ public class WebSocketController {
     private final ChangeSpendService changeSpendService;
     private final UpdateProductService updateProductService;
     private final DeleteCostService deleteCostService;
+    private final DeleteChatService deleteChatService;
 
     @MessageMapping("/chat/{chatId}/joinChat") // endpoint Api
     @SendTo("/topic/chat/{chatId}") // endpoint webSocket
@@ -43,6 +50,14 @@ public class WebSocketController {
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void sendMessage(@Valid SendMessage sendMessage) {
         sendMessageService.sendMessage(sendMessage);
+    }
+
+    @MessageMapping("/chat/{chatId}/deleteChat") // endpoint Api
+    @ResponseBody
+    public void deleteChat(
+            @Valid @RequestBody final DeleteChat deleteChat
+    ) {
+        deleteChatService.deleteChat(deleteChat);
     }
 
     @MessageMapping("/chat/{chatId}/addCost") // endpoint Api

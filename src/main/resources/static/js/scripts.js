@@ -173,6 +173,23 @@ $("#productDeleteIdbtn").on('click', (e) => {
                 }));
 })
 
+$("#chatDeleteIdbtn").on('click', (e) => {
+
+    let userId = $("#deleteusertId").val();
+    let chatId = $("#deleteChatId").val();
+
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/chat/' + chatId, function (message) {
+        console.log(JSON.parse( message.body));
+    });
+    // Tell your username to the server
+    stompClient.send("/app/chat/" + chatId + "/deleteChat" ,
+        {}, JSON.stringify({
+                    'chatId': chatId,
+                    'userId': userId,
+                }));
+})
+
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';

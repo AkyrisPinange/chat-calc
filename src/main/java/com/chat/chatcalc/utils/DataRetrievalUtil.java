@@ -5,19 +5,15 @@ import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DataRetrievalUtil {
     private final UserRepository userRepository;
     private final ChatsRepository chatsRepository;
     private final WebSocketService webSocketService;
-
-    public DataRetrievalUtil(UserRepository userRepository, ChatsRepository chatsRepository, WebSocketService webSocketService) {
-        this.userRepository = userRepository;
-        this.chatsRepository = chatsRepository;
-        this.webSocketService = webSocketService;
-    }
 
     public Chats getChat(String chatId) {
         return chatsRepository.findById(chatId)

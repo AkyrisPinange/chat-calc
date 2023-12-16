@@ -6,6 +6,7 @@ import com.chat.chatcalc.entiteis.Products;
 import com.chat.chatcalc.model.product.UpdateProduct;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,19 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+
 public class UpdateProductService {
+
     @Value("${websocket.uri.prefix}")
-    private String path;
-    private ChatsRepository chatsRepository;
+    private final String path;
+    private final ChatsRepository chatsRepository;
     private final SimpMessagingTemplate messagingTemplate;
      private Generate generate;
-
-    @Autowired
-    public UpdateProductService(ChatsRepository chatsRepository, SimpMessagingTemplate messagingTemplate, Generate generate){
-        this.chatsRepository = chatsRepository;
-        this.messagingTemplate = messagingTemplate;
-        this.generate = generate;
-    }
     public void updateProduct(UpdateProduct product) {
 
         Chats chats = chatsRepository.findChatsByProductId(product.getProductId());

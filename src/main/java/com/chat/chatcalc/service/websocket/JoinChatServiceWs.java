@@ -10,6 +10,7 @@ import com.chat.chatcalc.model.room.JoinRoom;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.service.WebSocketService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,12 @@ import java.time.LocalDateTime;
 
 
 @Service
+@AllArgsConstructor
 public class JoinChatServiceWs {
 
     private final ChatsRepository chatsRepository;
     private final UserRepository userRepository;
     private final WebSocketService webSocketService;
-
-    @Autowired
-    public JoinChatServiceWs(ChatsRepository chatsRepository, UserRepository userRepository, WebSocketService webSocketService) {
-        this.chatsRepository = chatsRepository;
-        this.userRepository = userRepository;
-        this.webSocketService = webSocketService;
-    }
 
     public void joinChat(JoinRoom joinRoom) {
         Chats chat = getChatById(joinRoom.getChatId());

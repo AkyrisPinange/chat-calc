@@ -7,6 +7,7 @@ import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.model.product.DeleteCost;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,6 +21,7 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class DeleteCostService {
     @Value("${websocket.uri.prefix}")
     private String path;
@@ -27,13 +29,6 @@ public class DeleteCostService {
     private final ChatsRepository chatsRepository;
     private final MongoTemplate mongoTemplate;
     private Generate generate;
-
-    public DeleteCostService(SimpMessagingTemplate messagingTemplate, MongoTemplate mongoTemplate, ChatsRepository chatsRepository,  Generate generate) {
-        this.messagingTemplate = messagingTemplate;
-        this.chatsRepository = chatsRepository;
-        this.mongoTemplate = mongoTemplate;
-        this.generate =  generate;
-    }
 
     public void deleteProduct(DeleteCost deleteCost) {
         Query query = new Query(Criteria.where("_id").is(deleteCost.getChatId()));

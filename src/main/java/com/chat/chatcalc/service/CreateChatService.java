@@ -7,21 +7,17 @@ import com.chat.chatcalc.model.room.CreateRoom;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.utils.ChatManipulationUtil;
 import com.chat.chatcalc.utils.Generate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CreateChatService {
+
     private final UserRepository userRepository;
     private final ChatManipulationUtil chatManipulationUtil;
     private final Generate generate;
-
-    @Autowired
-    public CreateChatService(UserRepository userRepository, ChatManipulationUtil chatManipulationUtil, Generate generate) {
-        this.userRepository = userRepository;
-        this.chatManipulationUtil = chatManipulationUtil;
-        this.generate = generate;
-    }
 
     public Chats createChat(CreateRoom createRoom) {
         User user = userRepository.findById(createRoom.getUserId()).orElse(null);

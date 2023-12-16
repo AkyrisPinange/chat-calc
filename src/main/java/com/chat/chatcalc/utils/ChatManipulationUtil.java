@@ -4,6 +4,7 @@ import com.chat.chatcalc.entiteis.*;
 import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,12 +14,12 @@ import java.util.Collections;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class ChatManipulationUtil {
 
-    private ChatsRepository chatsRepository;
+    private final ChatsRepository chatsRepository;
 
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
 
     public Participants newParticipant(String userId, String role) {
 

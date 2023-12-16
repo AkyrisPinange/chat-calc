@@ -6,20 +6,16 @@ import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.model.room.SendMessage;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.DataRetrievalUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class SendMessageServiceWs {
 
     private final WebSocketService webSocketService;
     private final DataRetrievalUtil dataRetrievalUtil;
-
-    @Autowired
-    public SendMessageServiceWs(DataRetrievalUtil dataRetrievalUtil, WebSocketService webSocketService) {
-        this.webSocketService = webSocketService;
-        this.dataRetrievalUtil = dataRetrievalUtil;
-    }
 
     public void sendMessage(SendMessage sendMessage) {
         User user = dataRetrievalUtil.getUser(sendMessage.getUserId(), sendMessage.getChatId());
