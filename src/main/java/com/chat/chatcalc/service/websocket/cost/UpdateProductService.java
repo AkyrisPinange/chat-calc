@@ -18,14 +18,12 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
 public class UpdateProductService {
-
     @Value("${websocket.uri.prefix}")
-    private final String path;
+    private  String path;
     private final ChatsRepository chatsRepository;
     private final SimpMessagingTemplate messagingTemplate;
-     private Generate generate;
+     private final Generate generate;
     public void updateProduct(UpdateProduct product) {
 
         Chats chats = chatsRepository.findChatsByProductId(product.getProductId());

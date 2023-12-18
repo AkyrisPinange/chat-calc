@@ -13,4 +13,5 @@ public class SignInRequest {
   String name;
   String email;
   String password;
+  String urlImg;
 }
