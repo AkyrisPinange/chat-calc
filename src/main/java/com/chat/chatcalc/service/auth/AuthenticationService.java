@@ -40,6 +40,7 @@ public class AuthenticationService {
                 .id(UUID.randomUUID().toString())
                 .name(request.getName())
                 .email(request.getEmail())
+                .urlImg(request.getUrlImg())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")))
                 .build();
@@ -64,6 +65,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder().token(jwt)
                 .name(user.getName())
                 .userId(user.getId())
+                .urlImg(user.getUrlImg())
                 .build();
     }
 }

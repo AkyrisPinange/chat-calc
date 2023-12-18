@@ -15,4 +15,5 @@ public class AuthenticationResponse {
     String token;
     String name;
     String userId;
+    String urlImg;
 }
