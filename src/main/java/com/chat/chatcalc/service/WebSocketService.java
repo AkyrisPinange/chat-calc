@@ -2,6 +2,7 @@ package com.chat.chatcalc.service;
 
 
 import com.chat.chatcalc.entiteis.Chats;
+import com.chat.chatcalc.entiteis.Costs;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.enums.MessageType;
 import com.chat.chatcalc.entiteis.ChatMessage;
@@ -21,36 +22,43 @@ public class WebSocketService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatsRepository chatsRepository;
     private final Generate generate;
+
     @Value("${websocket.uri.prefix}")
     private String path;
-
-
 
     public void errorMessageByChatId(String chatId, String message) {
         messagingTemplate.convertAndSend(getChatPath(chatId), new ChatMessage(message, MessageType.ERROR));
     }
 
     public void sendMessage(User user, Chats chat, String content, MessageType messageType) {
-        ChatMessage message = createChatMessage(user, chat, content, messageType);
-        chat.getMessages().add(message);
-        chatsRepository.save(chat);
-
-        messagingTemplate.convertAndSend(getChatPath(chat.getId()), message);
+        ChatMessage message = createChatMessage(user, chat, content, null, messageType);
+        processAndSendChatMessage(chat, message);
     }
 
-    private ChatMessage createChatMessage(User user, Chats chat, String content, MessageType messageType) {
+    public void sendMessageCost(User user, Chats chat, String content, Costs costs, MessageType messageType) {
+        ChatMessage message = createChatMessage(user, chat, content, costs, messageType);
+        processAndSendChatMessage(chat, message);
+    }
+
+    private ChatMessage createChatMessage(User user, Chats chat, String content, Costs costs, MessageType messageType) {
         return new ChatMessage(
                 UUID.randomUUID().toString(),
                 chat.getId(),
                 user.getId(),
                 content,
                 user.getName(),
+                costs,
                 generate.utcDate(),
                 messageType);
+    }
+
+    private void processAndSendChatMessage(Chats chat, ChatMessage message) {
+        chat.getMessages().add(message);
+        chatsRepository.save(chat);
+        messagingTemplate.convertAndSend(getChatPath(chat.getId()), message);
     }
 
     private String getChatPath(String chatId) {
         return path + chatId;
     }
-
 }

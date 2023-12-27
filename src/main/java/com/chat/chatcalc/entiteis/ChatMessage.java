@@ -26,6 +26,7 @@ public class ChatMessage {
     private String content;
     private String name;
     private Long timestamp;
+    private Costs costs;
     private MessageType type;
     private List<String> confirmations = new ArrayList<>();
 
@@ -40,6 +41,16 @@ public class ChatMessage {
         this.userId = userId;
         this.content = content;
         this.name = name;
+        this.timestamp = timestamp;
+        this.type = type;
+    }
+    public ChatMessage(String id, String chatId, String userId, String content, String name, Costs costs, Long timestamp, MessageType type) {
+        this.id = id;
+        this.chatId = chatId;
+        this.userId = userId;
+        this.content = content;
+        this.name = name;
+        this.costs = costs;
         this.timestamp = timestamp;
         this.type = type;
     }
