@@ -1,5 +1,6 @@
 package com.chat.chatcalc.controllers;
 
+import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.model.user.AlterPassword;
 import com.chat.chatcalc.model.SuccessResponse;
 import com.chat.chatcalc.model.user.UpdateUserName;
@@ -31,6 +32,14 @@ public class UserController {
             @Valid @RequestBody UpdateUserName updateUser
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.updateUserName(updateUser)));
+
+    }
+
+    @PostMapping("getUserById") // endpoint Api
+    public ResponseEntity<SuccessResponse<User>> getUserById(
+            @Valid @RequestBody String userId
+    ) {
+        return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.findUserById(userId)));
 
     }
 }

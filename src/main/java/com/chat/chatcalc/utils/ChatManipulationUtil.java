@@ -33,7 +33,7 @@ public class ChatManipulationUtil {
                                String role // creator role
     ) {
         Participants newParticipant = new Participants(userId, role , LocalDateTime.now());
-        Costs costs = new Costs(UUID.randomUUID().toString(), BigDecimal.ZERO, new BigDecimal(100),BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>(), MessageType.PRICE );
+        Costs costs = new Costs(UUID.randomUUID().toString(), BigDecimal.ZERO, new BigDecimal(100),BigDecimal.ZERO, new BigDecimal(100), new ArrayList<>(), MessageType.PRICE );
         Chats newChat = new Chats(UUID.randomUUID().toString(), // random id
                 roomName, roomId, Collections.singletonList(newParticipant), costs);
 

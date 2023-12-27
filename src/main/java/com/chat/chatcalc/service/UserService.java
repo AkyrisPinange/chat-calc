@@ -64,7 +64,7 @@ public class UserService {
         return "User Name alterado com sucesso";
     }
 
-    private User findUserById(String userId) {
+    public User findUserById(String userId) {
        return  userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }
