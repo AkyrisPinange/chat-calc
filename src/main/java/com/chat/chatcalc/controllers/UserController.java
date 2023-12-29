@@ -9,9 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,9 +33,9 @@ public class UserController {
 
     }
 
-    @PostMapping("getUserById") // endpoint Api
+    @GetMapping("getUserById") // endpoint Api
     public ResponseEntity<SuccessResponse<User>> getUserById(
-            @Valid @RequestBody String userId
+            @RequestParam String userId
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.findUserById(userId)));
 
