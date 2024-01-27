@@ -48,6 +48,6 @@ public class ChangeSpendService {
         chatsRepository.save(chat);
 
         String message = user.getName() + " alterou o valor a gastar para: " + changeSpend.getTotalSpend();
-        webSocketService.sendMessageCost(user, chat, message, cost, MessageType.PRICE);
+        webSocketService.sendMessageCost(user, chat, message, cost, MessageType.SPEND);
     }
 }

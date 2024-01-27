@@ -1,10 +1,8 @@
 package com.chat.chatcalc.service;
 
 import com.chat.chatcalc.entiteis.Chats;
-import com.chat.chatcalc.entiteis.Participants;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
-import com.chat.chatcalc.model.room.DeleteChat;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.reporsitory.UserRepository;
 import lombok.AllArgsConstructor;

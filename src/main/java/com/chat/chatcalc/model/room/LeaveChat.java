@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DeleteChat {
+public class LeaveChat {
     @NotNull()
     private String chatId;
     @NotNull()

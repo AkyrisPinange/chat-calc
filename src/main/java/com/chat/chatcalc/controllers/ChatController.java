@@ -4,9 +4,10 @@ package com.chat.chatcalc.controllers;
 import com.chat.chatcalc.entiteis.Chats;
 import com.chat.chatcalc.model.room.CreateRoom;
 import com.chat.chatcalc.model.SuccessResponse;
-import com.chat.chatcalc.model.room.DeleteChat;
+import com.chat.chatcalc.model.room.LeaveChat;
 import com.chat.chatcalc.service.ChatService;
 import com.chat.chatcalc.service.CreateChatService;
+import com.chat.chatcalc.service.websocket.LeaveChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class ChatController {
 
     private final ChatService chatService;
     private final CreateChatService createRoomServiceWs;
-
+    private final LeaveChatService leaveChatService;
 
     @PostMapping("createChat") // endpoint Api
     public  ResponseEntity<SuccessResponse<Chats>> createRoom(
@@ -31,6 +32,15 @@ public class ChatController {
     ) {
         return ResponseEntity.ok(new SuccessResponse<>("201", "Chat criado com sucesso", createRoomServiceWs.createChat(createRoom)));
 
+    }
+
+    @PostMapping("leave") // endpoint Api
+    @ResponseBody
+    public ResponseEntity<SuccessResponse<String>> deleteChat(
+            @Valid @RequestBody final LeaveChat leaveChat
+    ) {
+        leaveChatService.leaveChat(leaveChat);
+        return ResponseEntity.ok(new SuccessResponse<>("200", "User removed succesfoly!", "Sucesso!"));
     }
 
     @GetMapping("getChatByRoomId") // endpoint Api

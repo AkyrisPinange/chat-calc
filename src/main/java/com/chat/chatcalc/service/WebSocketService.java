@@ -31,23 +31,22 @@ public class WebSocketService {
     }
 
     public void sendMessage(User user, Chats chat, String content, MessageType messageType) {
-        ChatMessage message = createChatMessage(user, chat, content, null, messageType);
+        ChatMessage message = createChatMessage(user, chat, content, messageType);
         processAndSendChatMessage(chat, message);
     }
 
     public void sendMessageCost(User user, Chats chat, String content, Costs costs, MessageType messageType) {
-        ChatMessage message = createChatMessage(user, chat, content, costs, messageType);
-        processAndSendChatMessage(chat, message);
+        ChatMessage message = createChatMessage(user, chat, content, messageType);
+        processAndSendCostMessage(chat, costs,  message);
     }
 
-    private ChatMessage createChatMessage(User user, Chats chat, String content, Costs costs, MessageType messageType) {
+    private ChatMessage createChatMessage(User user, Chats chat, String content,  MessageType messageType) {
         return new ChatMessage(
                 UUID.randomUUID().toString(),
                 chat.getId(),
                 user.getId(),
                 content,
                 user.getName(),
-                costs,
                 generate.utcDate(),
                 messageType);
     }
@@ -56,6 +55,11 @@ public class WebSocketService {
         chat.getMessages().add(message);
         chatsRepository.save(chat);
         messagingTemplate.convertAndSend(getChatPath(chat.getId()), message);
+    }
+    private void processAndSendCostMessage(Chats chat, Costs costs, ChatMessage message ) {
+        chat.getMessages().add(message);
+        chatsRepository.save(chat);
+        messagingTemplate.convertAndSend(getChatPath(chat.getId()), costs);
     }
 
     private String getChatPath(String chatId) {

@@ -5,8 +5,9 @@ public enum MessageType {
     CHAT,
     JOIN ,
     LEAVE,
-    PRICE,
+    COST,
     CREATE,
     SEND,
-    ERROR
+    ERROR,
+    SPEND
 }

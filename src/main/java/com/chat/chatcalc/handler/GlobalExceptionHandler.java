@@ -26,7 +26,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorDetails> notFoundException(NotFoundException ex) {
-        ErrorDetails errorModel = new ErrorDetails(400 , ex.getMessage());
+        ErrorDetails errorModel = new ErrorDetails(404 , ex.getMessage());
 
         return new ResponseEntity<>(errorModel, HttpStatus.NOT_FOUND);
     }
