@@ -11,33 +11,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat/")
+@RequestMapping("/user/")
 public class UserController {
 
     private final UserService userService;
-    @PostMapping("updatePassword") // endpoint Api
+    @PutMapping("updatePassword") // endpoint Api
     public ResponseEntity<SuccessResponse<String>> updatePassword(
             @Valid @RequestBody AlterPassword alterPassword
     ) {
-        return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.alterPassword(alterPassword)));
+        return ResponseEntity.ok(new SuccessResponse<>("200", "User updated", userService.alterPassword(alterPassword)));
 
     }
 
-    @PostMapping("updateUsername") // endpoint Api
+    @PutMapping("updateUsername") // endpoint Api
     public ResponseEntity<SuccessResponse<String>> updatePassword(
             @Valid @RequestBody UpdateUserName updateUser
     ) {
-        return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.updateUserName(updateUser)));
+        return ResponseEntity.ok(new SuccessResponse<>("200", "User updated", userService.updateUserName(updateUser)));
 
     }
 
-    @GetMapping("getUserById") // endpoint Api
+    @GetMapping("userById") // endpoint Api
     public ResponseEntity<SuccessResponse<User>> getUserById(
             @RequestParam String userId
     ) {
-        return ResponseEntity.ok(new SuccessResponse<>("200", "Suceeso", userService.findUserById(userId)));
+        return ResponseEntity.ok(new SuccessResponse<>("200", "User list", userService.findUserById(userId)));
 
     }
 }

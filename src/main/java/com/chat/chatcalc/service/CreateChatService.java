@@ -8,7 +8,6 @@ import com.chat.chatcalc.reporsitory.UserRepository;
 import com.chat.chatcalc.utils.ChatManipulationUtil;
 import com.chat.chatcalc.utils.Generate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

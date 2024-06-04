@@ -1,8 +1,8 @@
 package com.chat.chatcalc.service.auth;
 
 
-import com.chat.chatcalc.dto.AuthenticationResponse;
-import com.chat.chatcalc.dto.SignInRequest;
+import com.chat.chatcalc.model.login.AuthenticationResponse;
+import com.chat.chatcalc.model.login.SignInRequest;
 import com.chat.chatcalc.entiteis.User;
 import com.chat.chatcalc.handler.exceptions.NotFoundException;
 import com.chat.chatcalc.reporsitory.UserRepository;

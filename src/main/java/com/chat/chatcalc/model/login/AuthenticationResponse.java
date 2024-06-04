@@ -1,4 +1,4 @@
-package com.chat.chatcalc.dto;
+package com.chat.chatcalc.model.login;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

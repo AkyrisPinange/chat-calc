@@ -7,7 +7,6 @@ import com.chat.chatcalc.model.product.UpdateProduct;
 import com.chat.chatcalc.reporsitory.ChatsRepository;
 import com.chat.chatcalc.utils.Generate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;

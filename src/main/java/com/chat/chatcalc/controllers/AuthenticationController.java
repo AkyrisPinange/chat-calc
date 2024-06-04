@@ -1,7 +1,7 @@
 package com.chat.chatcalc.controllers;
 
-import com.chat.chatcalc.dto.AuthenticationResponse;
-import com.chat.chatcalc.dto.SignInRequest;
+import com.chat.chatcalc.model.login.AuthenticationResponse;
+import com.chat.chatcalc.model.login.SignInRequest;
 import com.chat.chatcalc.service.auth.AuthenticationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

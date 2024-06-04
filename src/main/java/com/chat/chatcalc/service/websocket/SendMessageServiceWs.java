@@ -7,7 +7,6 @@ import com.chat.chatcalc.model.room.SendMessage;
 import com.chat.chatcalc.service.WebSocketService;
 import com.chat.chatcalc.utils.DataRetrievalUtil;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

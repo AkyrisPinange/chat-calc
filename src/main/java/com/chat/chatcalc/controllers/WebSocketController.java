@@ -46,8 +46,6 @@ public class WebSocketController {
         sendMessageService.sendMessage(sendMessage);
     }
 
-
-
     @MessageMapping("/chat/{chatId}/addCost") // endpoint WebSocket
     @SendTo("/topic/chat/{chatId}")// endpoint webSocket
     public void sendCosts(CostData costs) {
