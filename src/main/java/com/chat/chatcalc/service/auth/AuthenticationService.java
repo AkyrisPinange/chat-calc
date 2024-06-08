@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -51,13 +52,13 @@ public class AuthenticationService {
 
     public AuthenticationResponse signin(SignInRequest request) {
 
-        var user = userRepository.findByEmail(request.getEmail()).orElse(null);
+           Optional<User> user = userRepository.findByEmail(request.getEmail());
 
-        if (user != null) {
-           return returnAuthentication(user);
-        } else {
-            return signup(request);
-        }
+            if (user.isPresent()) {
+                return returnAuthentication(user.get());
+            } else {
+                return signup(request);
+            }
     }
 
     AuthenticationResponse returnAuthentication(User user) {
