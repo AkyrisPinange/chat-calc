@@ -28,11 +28,11 @@ public class DeleteCostService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatsRepository chatsRepository;
     private final MongoTemplate mongoTemplate;
-    private Generate generate;
+    private final Generate generate;
 
     public void deleteProduct(DeleteCost deleteCost) {
         Query query = new Query(Criteria.where("_id").is(deleteCost.getChatId()));
-        Update update = new Update().pull("costs.products", new Query(Criteria.where("_id").is(deleteCost.getProductId())));
+         Update update = new Update().pull("costs.products", new Query(Criteria.where("_id").is(deleteCost.getProductId())));
 
         mongoTemplate.updateFirst(query, update, Chats.class);
 
