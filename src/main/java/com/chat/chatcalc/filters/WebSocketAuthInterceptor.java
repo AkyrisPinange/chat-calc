@@ -27,26 +27,34 @@ public class WebSocketAuthInterceptor implements ChannelInterceptor {
     @Override
     public Message<?> preSend(@NonNull Message<?> message, @NonNull MessageChannel channel) {
         StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-
+            System.out.println("LINE 30 :->  " + accessor.toString());
         if (accessor != null && StompCommand.CONNECT.equals(accessor.getCommand())) {
             // Obtenha o valor do cabeçalho "Authorization" da solicitação WebSocket
             List<String> authorizationHeaders = accessor.getNativeHeader("Authorization");
-
+            System.out.println("LINE 34 :->  " + authorizationHeaders.toString());
             if (authorizationHeaders != null && !authorizationHeaders.isEmpty()) {
                 String authorizationHeader = authorizationHeaders.get(0);
+                System.out.println("LINE 37 :->  " + authorizationHeader.toString());
 
                 if (authorizationHeader.startsWith("Bearer ")) {
                     String token = authorizationHeader.substring(7);
-                    String userEmail = jwtService.extractUserName(token);
-                    UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
+                    System.out.println("LINE 41 :->  " + token.toString());
 
+                    String userEmail = jwtService.extractUserName(token);
+                    System.out.println("LINE 44 :->  " + userEmail.toString());
+
+                    UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
+                    System.out.println("LINE 47 :->  " + userEmail.toString());
                     if (!jwtService.isTokenValid(token, userDetails)) {
+                        System.out.println("LINE 49 :->  Token inválido ou sessão expirada");
                         throw new UserUnauthorizedException("Token inválido ou sessão expirada");
                     }
                 } else {
+                    System.out.println("LINE 53 :->  Token JWT mal formatado");
                     throw new UserUnauthorizedException("Token JWT mal formatado");
                 }
             } else {
+                System.out.println("LINE 57 :->  Token JWT ausente na solicitação");
                 throw new UserUnauthorizedException("Token JWT ausente na solicitação");
             }
         }
