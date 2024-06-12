@@ -35,7 +35,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // Habilita o suporte a SockJS para permitir que navegadores mais antigos se conectem
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:8080")
+                .setAllowedOrigins("*")
                 .withSockJS();
     }
 
